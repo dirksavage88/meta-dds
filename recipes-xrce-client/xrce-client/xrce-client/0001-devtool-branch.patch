@@ -1,0 +1,1559 @@
+From d365cdc15be37adb0436eb0dfd71b81f87c0e032 Mon Sep 17 00:00:00 2001
+From: dirksavage88 <dirksavage88@gmail.com>
+Date: Sat, 12 Nov 2022 16:19:23 -0500
+Subject: [PATCH] devtool branch
+
+Signed-off-by: dirksavage88 <dirksavage88@gmail.com>
+---
+ .dockerignore                                       |   0
+ .github/dco.yml                                     |   0
+ .github/workflows/codeql-analysis.yml               |   0
+ .gitignore                                          |   0
+ CMakeLists.txt                                      |  12 +++++++-----
+ CONTRIBUTING.md                                     |   0
+ CTestConfig.cmake                                   |   0
+ Dockerfile                                          |   0
+ LICENSE                                             |   0
+ PLATFORM_SUPPORT.md                                 |   0
+ QUALITY.md                                          |   0
+ README.md                                           |   0
+ VERSIONING.md                                       |   0
+ ci/CTestJenkins.cmake                               |   0
+ ci/linux/CMakeLists.txt                             |   0
+ ci/valgrind.supp                                    |   0
+ ci/windows/CMakeLists.txt                           |   0
+ cmake/SuperBuild.cmake                              |   0
+ cmake/common/check_configuration.cmake              |   0
+ cmake/common/eprosima_libraries.cmake               |   0
+ cmake/common/gtest.cmake                            |   0
+ cmake/modules/FindGMock.cmake                       |   0
+ cmake/packaging/Config.cmake.in                     |   0
+ colcon.pkg                                          |   0
+ docs/Client.png                                     | Bin
+ docs/General.png                                    | Bin
+ doxyfile.in                                         |   0
+ examples/BinaryEntityCreation/CMakeLists.txt        |   0
+ examples/BinaryEntityCreation/main.c                |   0
+ examples/ContinuousFragment/CMakeLists.txt          |   0
+ examples/ContinuousFragment/main.c                  |   0
+ examples/CustomTransports/CMakeLists.txt            |   0
+ examples/CustomTransports/HelloWorld.c              |   0
+ examples/CustomTransports/HelloWorld.h              |   0
+ examples/CustomTransports/HelloWorld.idl            |   0
+ examples/CustomTransports/main.c                    |   0
+ examples/CustomTransports/my_custom_transport.c     |   0
+ examples/CustomTransports/my_custom_transport.h     |   0
+ examples/Deployment/CMakeLists.txt                  |   0
+ examples/Deployment/HelloWorld.c                    |   0
+ examples/Deployment/HelloWorld.h                    |   0
+ examples/Deployment/HelloWorld.idl                  |   0
+ examples/Deployment/README.md                       |   0
+ examples/Deployment/configurator_client.c           |   0
+ examples/Deployment/publisher.c                     |   0
+ examples/Deployment/subscriber.c                    |   0
+ examples/Discovery/CMakeLists.txt                   |   0
+ examples/Discovery/README.md                        |   0
+ examples/Discovery/main.c                           |   0
+ examples/MultiSessionHelloWorld/CMakeLists.txt      |   0
+ examples/MultiSessionHelloWorld/HelloWorld.c        |   0
+ examples/MultiSessionHelloWorld/HelloWorld.h        |   0
+ examples/MultiSessionHelloWorld/HelloWorld.idl      |   0
+ examples/MultiSessionHelloWorld/README.md           |   0
+ examples/MultiSessionHelloWorld/main.c              |   0
+ examples/PingAgent/CMakeLists.txt                   |   0
+ examples/PingAgent/Serial/CMakeLists.txt            |   0
+ examples/PingAgent/Serial/main.c                    |   0
+ examples/PingAgent/TCP/CMakeLists.txt               |   0
+ examples/PingAgent/TCP/main.c                       |   0
+ examples/PingAgent/UDP/CMakeLists.txt               |   0
+ examples/PingAgent/UDP/main.c                       |   0
+ examples/PublishHelloWorld/CMakeLists.txt           |   0
+ examples/PublishHelloWorld/HelloWorld.c             |   0
+ examples/PublishHelloWorld/HelloWorld.h             |   0
+ examples/PublishHelloWorld/HelloWorld.idl           |   0
+ examples/PublishHelloWorld/README.md                |   0
+ examples/PublishHelloWorld/main.c                   |   0
+ examples/PublishHelloWorldBestEffort/CMakeLists.txt |   0
+ examples/PublishHelloWorldBestEffort/HelloWorld.c   |   0
+ examples/PublishHelloWorldBestEffort/HelloWorld.h   |   0
+ examples/PublishHelloWorldBestEffort/HelloWorld.idl |   0
+ examples/PublishHelloWorldBestEffort/README.md      |   0
+ examples/PublishHelloWorldBestEffort/main.c         |   0
+ examples/PublishHelloWorldCAN/CMakeLists.txt        |   0
+ examples/PublishHelloWorldCAN/HelloWorld.c          |   0
+ examples/PublishHelloWorldCAN/HelloWorld.h          |   0
+ examples/PublishHelloWorldCAN/HelloWorld.idl        |   0
+ examples/PublishHelloWorldCAN/README.md             |   0
+ examples/PublishHelloWorldCAN/main.c                |   0
+ examples/PublishHelloWorldP2P/CMakeLists.txt        |   0
+ examples/PublishHelloWorldP2P/HelloWorld.c          |   0
+ examples/PublishHelloWorldP2P/HelloWorld.h          |   0
+ examples/PublishHelloWorldP2P/HelloWorld.idl        |   0
+ examples/PublishHelloWorldP2P/README.md             |   0
+ examples/PublishHelloWorldP2P/main.c                |   0
+ examples/ReplyAdder/CMakeLists.txt                  |   0
+ examples/ReplyAdder/main.c                          |   0
+ examples/RequestAdder/CMakeLists.txt                |   0
+ examples/RequestAdder/main.c                        |   0
+ examples/ShapesDemo/CMakeLists.txt                  |   0
+ examples/ShapesDemo/README.md                       |   0
+ examples/ShapesDemo/ShapeType.c                     |   0
+ examples/ShapesDemo/ShapeType.h                     |   0
+ examples/ShapesDemo/ShapeType.idl                   |   0
+ examples/ShapesDemo/main.c                          |   0
+ examples/SharedMemoryPubSub/CMakeLists.txt          |   0
+ examples/SharedMemoryPubSub/README.md               |   0
+ examples/SharedMemoryPubSub/main.c                  |   0
+ examples/SharedMemoryReqRep/CMakeLists.txt          |   0
+ examples/SharedMemoryReqRep/README.md               |   0
+ examples/SharedMemoryReqRep/main.c                  |   0
+ examples/SubscribeHelloWorld/CMakeLists.txt         |   0
+ examples/SubscribeHelloWorld/HelloWorld.c           |   0
+ examples/SubscribeHelloWorld/HelloWorld.h           |   0
+ examples/SubscribeHelloWorld/HelloWorld.idl         |   0
+ examples/SubscribeHelloWorld/README.md              |   0
+ examples/SubscribeHelloWorld/main.c                 |   0
+ .../SubscribeHelloWorldBestEffort/CMakeLists.txt    |   0
+ examples/SubscribeHelloWorldBestEffort/HelloWorld.c |   0
+ examples/SubscribeHelloWorldBestEffort/HelloWorld.h |   0
+ .../SubscribeHelloWorldBestEffort/HelloWorld.idl    |   0
+ examples/SubscribeHelloWorldBestEffort/README.md    |   0
+ examples/SubscribeHelloWorldBestEffort/main.c       |   0
+ examples/SubscribeHelloWorldP2P/CMakeLists.txt      |   0
+ examples/SubscribeHelloWorldP2P/HelloWorld.c        |   0
+ examples/SubscribeHelloWorldP2P/HelloWorld.h        |   0
+ examples/SubscribeHelloWorldP2P/HelloWorld.idl      |   0
+ examples/SubscribeHelloWorldP2P/README.md           |   0
+ examples/SubscribeHelloWorldP2P/main.c              |   0
+ examples/TimeSync/CMakeLists.txt                    |   0
+ examples/TimeSync/main.c                            |   0
+ examples/TimeSyncWithCb/CMakeLists.txt              |   0
+ examples/TimeSyncWithCb/main.c                      |   0
+ include/uxr/client/client.h                         |   0
+ include/uxr/client/config.h.in                      |   0
+ .../uxr/client/core/communication/communication.h   |   0
+ .../client/core/session/common_create_entities.h    |   0
+ .../uxr/client/core/session/create_entities_bin.h   |   0
+ .../uxr/client/core/session/create_entities_ref.h   |   0
+ .../uxr/client/core/session/create_entities_xml.h   |   0
+ include/uxr/client/core/session/object_id.h         |   0
+ include/uxr/client/core/session/read_access.h       |   0
+ include/uxr/client/core/session/session.h           |   0
+ include/uxr/client/core/session/session_info.h      |   0
+ .../core/session/stream/input_best_effort_stream.h  |   0
+ .../core/session/stream/input_reliable_stream.h     |   0
+ .../core/session/stream/output_best_effort_stream.h |   0
+ .../core/session/stream/output_reliable_stream.h    |   0
+ .../client/core/session/stream/reliable_stream.h    |   0
+ include/uxr/client/core/session/stream/seq_num.h    |   0
+ include/uxr/client/core/session/stream/stream_id.h  |   0
+ .../uxr/client/core/session/stream/stream_storage.h |   0
+ include/uxr/client/core/session/time_sync.h         |   0
+ include/uxr/client/core/session/write_access.h      |   0
+ include/uxr/client/core/type/xrce_types.h           |   0
+ include/uxr/client/defines.h                        |   0
+ include/uxr/client/profile/discovery/discovery.h    |   0
+ .../uxr/client/profile/multithread/multithread.h    |   0
+ .../client/profile/transport/can/can_transport.h    |   0
+ .../profile/transport/can/can_transport_posix.h     |   0
+ .../profile/transport/custom/custom_transport.h     |   0
+ include/uxr/client/profile/transport/ip/ip.h        |   0
+ .../client/profile/transport/ip/tcp/tcp_transport.h |   0
+ .../ip/tcp/tcp_transport_freertos_plus_tcp.h        |   0
+ .../profile/transport/ip/tcp/tcp_transport_posix.h  |   0
+ .../transport/ip/tcp/tcp_transport_posix_nopoll.h   |   0
+ .../transport/ip/tcp/tcp_transport_rtems_bsd_net.h  |   0
+ .../transport/ip/tcp/tcp_transport_windows.h        |   0
+ .../client/profile/transport/ip/udp/udp_transport.h |   0
+ .../ip/udp/udp_transport_freertos_plus_tcp.h        |   0
+ .../profile/transport/ip/udp/udp_transport_posix.h  |   0
+ .../transport/ip/udp/udp_transport_posix_nopoll.h   |   0
+ .../transport/ip/udp/udp_transport_rtems_bsd_net.h  |   0
+ .../transport/ip/udp/udp_transport_windows.h        |   0
+ .../profile/transport/serial/serial_transport.h     |   0
+ .../transport/serial/serial_transport_platform.h    |   0
+ .../transport/serial/serial_transport_posix.h       |   0
+ .../serial/serial_transport_rtems_bsd_net.h         |   0
+ .../stream_framing/stream_framing_protocol.h        |   0
+ include/uxr/client/transport.h                      |   0
+ include/uxr/client/util/ping.h                      |   0
+ include/uxr/client/util/time.h                      |   0
+ include/uxr/client/visibility.h                     |   0
+ src/c/core/log/log.c                                |   0
+ src/c/core/log/log_internal.h                       |   0
+ src/c/core/serialization/xrce_header.c              |   0
+ src/c/core/serialization/xrce_header_internal.h     |   0
+ src/c/core/serialization/xrce_subheader.c           |   0
+ src/c/core/serialization/xrce_subheader_internal.h  |   0
+ src/c/core/serialization/xrce_types.c               |   0
+ src/c/core/session/common_create_entities.c         |   0
+ .../core/session/common_create_entities_internal.h  |   0
+ src/c/core/session/create_entities_bin.c            |   0
+ src/c/core/session/create_entities_ref.c            |   0
+ src/c/core/session/create_entities_xml.c            |   0
+ src/c/core/session/object_id.c                      |   0
+ src/c/core/session/read_access.c                    |   0
+ src/c/core/session/session.c                        |   0
+ src/c/core/session/session_info.c                   |   0
+ src/c/core/session/session_info_internal.h          |   0
+ src/c/core/session/session_internal.h               |   0
+ .../stream/common_reliable_stream_internal.h        |   0
+ .../core/session/stream/input_best_effort_stream.c  |   0
+ .../stream/input_best_effort_stream_internal.h      |   0
+ src/c/core/session/stream/input_reliable_stream.c   |   0
+ .../session/stream/input_reliable_stream_internal.h |   0
+ .../core/session/stream/output_best_effort_stream.c |   0
+ .../stream/output_best_effort_stream_internal.h     |   0
+ src/c/core/session/stream/output_reliable_stream.c  |   0
+ .../stream/output_reliable_stream_internal.h        |   0
+ src/c/core/session/stream/seq_num.c                 |   0
+ src/c/core/session/stream/seq_num_internal.h        |   0
+ src/c/core/session/stream/stream_id.c               |   0
+ src/c/core/session/stream/stream_storage.c          |   0
+ src/c/core/session/stream/stream_storage_internal.h |   0
+ src/c/core/session/submessage.c                     |   0
+ src/c/core/session/submessage_internal.h            |   0
+ src/c/core/session/write_access.c                   |   0
+ src/c/profile/discovery/discovery.c                 |   0
+ .../udp_transport_datagram_freertos_plus_tcp.c      |   0
+ .../transport/udp_transport_datagram_internal.h     |   0
+ .../transport/udp_transport_datagram_posix.c        |   0
+ .../transport/udp_transport_datagram_posix_nopoll.c |   0
+ .../udp_transport_datagram_rtems_bsd_net.c          |   0
+ .../transport/udp_transport_datagram_windows.c      |   0
+ src/c/profile/matching/matching.c                   |   0
+ src/c/profile/matching/matching_internal.h          |   0
+ src/c/profile/multithread/multithread.c             |   0
+ src/c/profile/shared_memory/shared_memory.c         |   0
+ .../profile/shared_memory/shared_memory_internal.h  |   0
+ src/c/profile/transport/can/can_transport.c         |   0
+ .../profile/transport/can/can_transport_internal.h  |   0
+ src/c/profile/transport/can/can_transport_posix.c   |   0
+ src/c/profile/transport/custom/custom_transport.c   |   0
+ src/c/profile/transport/ip/ip_freertos_plus_tcp.c   |   0
+ src/c/profile/transport/ip/ip_posix.c               |   0
+ src/c/profile/transport/ip/ip_rtems_bsd_net.c       |   0
+ src/c/profile/transport/ip/ip_windows.c             |   0
+ src/c/profile/transport/ip/tcp/tcp_transport.c      |   0
+ .../ip/tcp/tcp_transport_freertos_plus_tcp.c        |   0
+ .../transport/ip/tcp/tcp_transport_internal.h       |   0
+ .../profile/transport/ip/tcp/tcp_transport_posix.c  |   0
+ .../transport/ip/tcp/tcp_transport_posix_nopoll.c   |   0
+ .../transport/ip/tcp/tcp_transport_rtems_bsd_net.c  |   0
+ .../transport/ip/tcp/tcp_transport_windows.c        |   0
+ src/c/profile/transport/ip/udp/udp_transport.c      |   0
+ .../ip/udp/udp_transport_freertos_plus_tcp.c        |   0
+ .../transport/ip/udp/udp_transport_internal.h       |   0
+ .../profile/transport/ip/udp/udp_transport_posix.c  |   0
+ .../transport/ip/udp/udp_transport_posix_nopoll.c   |   0
+ .../transport/ip/udp/udp_transport_rtems_bsd_net.c  |   0
+ .../transport/ip/udp/udp_transport_windows.c        |   0
+ src/c/profile/transport/serial/serial_transport.c   |   0
+ .../transport/serial/serial_transport_posix.c       |   0
+ .../serial/serial_transport_rtems_bsd_net.c         |   0
+ .../stream_framing/stream_framing_protocol.c        |   0
+ .../stream_framing/stream_framing_protocol.h        |   0
+ src/c/util/ping.c                                   |   0
+ src/c/util/time.c                                   |   0
+ src/c/util/time_internal.h                          |   0
+ test/case/CMakeLists.txt                            |   0
+ test/case/installation/InstallationTest.cmake       |   0
+ test/case/packaging/CMakeLists.txt                  |   0
+ test/case/packaging/Packaging.cmake                 |   0
+ test/case/packaging/main.c                          |   0
+ test/memory/consumption/CMakeLists.txt              |   0
+ test/memory/consumption/MemoryConsumption.c         |   0
+ test/memory/consumption/performance_profile.config  |   0
+ test/memory/consumption/stack_analysis.py           |   0
+ test/memory/memory_map/complete_profile.config      |   0
+ test/memory/memory_map/core_profile.config          |   0
+ test/memory/memory_map/custom_profile.config        |   0
+ test/memory/memory_map/memory_map_analysis.py       |   0
+ test/memory/memory_map/serial_profile.config        |   0
+ test/memory/memory_map/tcp_profile.config           |   0
+ test/memory/memory_map/udp_profile.config           |   0
+ test/shared_memory/CMakeLists.txt                   |   0
+ test/shared_memory/SharedMemory.cpp                 |   0
+ test/transport/custom_comm/CMakeLists.txt           |   0
+ test/transport/custom_comm/CustomComm.cpp           |   0
+ test/transport/custom_comm/CustomComm.hpp           |   0
+ test/transport/serial_comm/CMakeLists.txt           |   0
+ test/transport/serial_comm/SerialComm.cpp           |   0
+ test/transport/serial_comm/SerialComm.hpp           |   0
+ test/unitary/CMakeLists.txt                         |   0
+ test/unitary/session/ObjectId.cpp                   |   0
+ test/unitary/session/Session.cpp                    |   0
+ test/unitary/session/SessionInfo.cpp                |   0
+ test/unitary/session/Submessage.cpp                 |   0
+ test/unitary/session/Utils.cpp                      |   0
+ test/unitary/session/WriteReadAccess.cpp            |   0
+ .../session/streams/CommonReliableStream.cpp        |   0
+ .../session/streams/InputBestEffortStream.cpp       |   0
+ .../unitary/session/streams/InputReliableStream.cpp |   0
+ .../session/streams/OutputBestEffortStream.cpp      |   0
+ .../session/streams/OutputReliableStream.cpp        |   0
+ test/unitary/session/streams/SeqNum.cpp             |   0
+ test/unitary/session/streams/StreamId.cpp           |   0
+ test/unitary/session/streams/StreamStorage.cpp      |   0
+ toolchains/CMakeLists.txt                           |   0
+ toolchains/nuttx_toolchain.cmake                    |   0
+ toolchains/raspberrypi_toolchain.cmake              |   0
+ uncrustify.cfg                                      |   0
+ utils/doxygen/pages/DoxygenLayout.xml               |   0
+ utils/doxygen/pages/customdoxygen.css               |   0
+ utils/doxygen/pages/eprosima_footer.html            |   0
+ utils/doxygen/pages/eprosima_header.html            |   0
+ utils/doxygen/pages/mainpage.dox                    |   0
+ utils/images/logo/eProsimaLogo.jpg                  | Bin
+ utils/images/logo/eProsimaLogo.png                  | Bin
+ 301 files changed, 7 insertions(+), 5 deletions(-)
+ mode change 100644 => 100755 .dockerignore
+ mode change 100644 => 100755 .github/dco.yml
+ mode change 100644 => 100755 .github/workflows/codeql-analysis.yml
+ mode change 100644 => 100755 .gitignore
+ mode change 100644 => 100755 CONTRIBUTING.md
+ mode change 100644 => 100755 CTestConfig.cmake
+ mode change 100644 => 100755 Dockerfile
+ mode change 100644 => 100755 LICENSE
+ mode change 100644 => 100755 PLATFORM_SUPPORT.md
+ mode change 100644 => 100755 QUALITY.md
+ mode change 100644 => 100755 README.md
+ mode change 100644 => 100755 VERSIONING.md
+ mode change 100644 => 100755 ci/CTestJenkins.cmake
+ mode change 100644 => 100755 ci/linux/CMakeLists.txt
+ mode change 100644 => 100755 ci/valgrind.supp
+ mode change 100644 => 100755 ci/windows/CMakeLists.txt
+ mode change 100644 => 100755 cmake/SuperBuild.cmake
+ mode change 100644 => 100755 cmake/common/check_configuration.cmake
+ mode change 100644 => 100755 cmake/common/eprosima_libraries.cmake
+ mode change 100644 => 100755 cmake/common/gtest.cmake
+ mode change 100644 => 100755 cmake/modules/FindGMock.cmake
+ mode change 100644 => 100755 cmake/packaging/Config.cmake.in
+ mode change 100644 => 100755 colcon.pkg
+ mode change 100644 => 100755 docs/Client.png
+ mode change 100644 => 100755 docs/General.png
+ mode change 100644 => 100755 doxyfile.in
+ mode change 100644 => 100755 examples/BinaryEntityCreation/CMakeLists.txt
+ mode change 100644 => 100755 examples/BinaryEntityCreation/main.c
+ mode change 100644 => 100755 examples/ContinuousFragment/CMakeLists.txt
+ mode change 100644 => 100755 examples/ContinuousFragment/main.c
+ mode change 100644 => 100755 examples/CustomTransports/CMakeLists.txt
+ mode change 100644 => 100755 examples/CustomTransports/HelloWorld.c
+ mode change 100644 => 100755 examples/CustomTransports/HelloWorld.h
+ mode change 100644 => 100755 examples/CustomTransports/HelloWorld.idl
+ mode change 100644 => 100755 examples/CustomTransports/main.c
+ mode change 100644 => 100755 examples/CustomTransports/my_custom_transport.c
+ mode change 100644 => 100755 examples/CustomTransports/my_custom_transport.h
+ mode change 100644 => 100755 examples/Deployment/CMakeLists.txt
+ mode change 100644 => 100755 examples/Deployment/HelloWorld.c
+ mode change 100644 => 100755 examples/Deployment/HelloWorld.h
+ mode change 100644 => 100755 examples/Deployment/HelloWorld.idl
+ mode change 100644 => 100755 examples/Deployment/README.md
+ mode change 100644 => 100755 examples/Deployment/configurator_client.c
+ mode change 100644 => 100755 examples/Deployment/publisher.c
+ mode change 100644 => 100755 examples/Deployment/subscriber.c
+ mode change 100644 => 100755 examples/Discovery/CMakeLists.txt
+ mode change 100644 => 100755 examples/Discovery/README.md
+ mode change 100644 => 100755 examples/Discovery/main.c
+ mode change 100644 => 100755 examples/MultiSessionHelloWorld/CMakeLists.txt
+ mode change 100644 => 100755 examples/MultiSessionHelloWorld/HelloWorld.c
+ mode change 100644 => 100755 examples/MultiSessionHelloWorld/HelloWorld.h
+ mode change 100644 => 100755 examples/MultiSessionHelloWorld/HelloWorld.idl
+ mode change 100644 => 100755 examples/MultiSessionHelloWorld/README.md
+ mode change 100644 => 100755 examples/MultiSessionHelloWorld/main.c
+ mode change 100644 => 100755 examples/PingAgent/CMakeLists.txt
+ mode change 100644 => 100755 examples/PingAgent/Serial/CMakeLists.txt
+ mode change 100644 => 100755 examples/PingAgent/Serial/main.c
+ mode change 100644 => 100755 examples/PingAgent/TCP/CMakeLists.txt
+ mode change 100644 => 100755 examples/PingAgent/TCP/main.c
+ mode change 100644 => 100755 examples/PingAgent/UDP/CMakeLists.txt
+ mode change 100644 => 100755 examples/PingAgent/UDP/main.c
+ mode change 100644 => 100755 examples/PublishHelloWorld/CMakeLists.txt
+ mode change 100644 => 100755 examples/PublishHelloWorld/HelloWorld.c
+ mode change 100644 => 100755 examples/PublishHelloWorld/HelloWorld.h
+ mode change 100644 => 100755 examples/PublishHelloWorld/HelloWorld.idl
+ mode change 100644 => 100755 examples/PublishHelloWorld/README.md
+ mode change 100644 => 100755 examples/PublishHelloWorld/main.c
+ mode change 100644 => 100755 examples/PublishHelloWorldBestEffort/CMakeLists.txt
+ mode change 100644 => 100755 examples/PublishHelloWorldBestEffort/HelloWorld.c
+ mode change 100644 => 100755 examples/PublishHelloWorldBestEffort/HelloWorld.h
+ mode change 100644 => 100755 examples/PublishHelloWorldBestEffort/HelloWorld.idl
+ mode change 100644 => 100755 examples/PublishHelloWorldBestEffort/README.md
+ mode change 100644 => 100755 examples/PublishHelloWorldBestEffort/main.c
+ mode change 100644 => 100755 examples/PublishHelloWorldCAN/CMakeLists.txt
+ mode change 100644 => 100755 examples/PublishHelloWorldCAN/HelloWorld.c
+ mode change 100644 => 100755 examples/PublishHelloWorldCAN/HelloWorld.h
+ mode change 100644 => 100755 examples/PublishHelloWorldCAN/HelloWorld.idl
+ mode change 100644 => 100755 examples/PublishHelloWorldCAN/README.md
+ mode change 100644 => 100755 examples/PublishHelloWorldCAN/main.c
+ mode change 100644 => 100755 examples/PublishHelloWorldP2P/CMakeLists.txt
+ mode change 100644 => 100755 examples/PublishHelloWorldP2P/HelloWorld.c
+ mode change 100644 => 100755 examples/PublishHelloWorldP2P/HelloWorld.h
+ mode change 100644 => 100755 examples/PublishHelloWorldP2P/HelloWorld.idl
+ mode change 100644 => 100755 examples/PublishHelloWorldP2P/README.md
+ mode change 100644 => 100755 examples/PublishHelloWorldP2P/main.c
+ mode change 100644 => 100755 examples/ReplyAdder/CMakeLists.txt
+ mode change 100644 => 100755 examples/ReplyAdder/main.c
+ mode change 100644 => 100755 examples/RequestAdder/CMakeLists.txt
+ mode change 100644 => 100755 examples/RequestAdder/main.c
+ mode change 100644 => 100755 examples/ShapesDemo/CMakeLists.txt
+ mode change 100644 => 100755 examples/ShapesDemo/README.md
+ mode change 100644 => 100755 examples/ShapesDemo/ShapeType.c
+ mode change 100644 => 100755 examples/ShapesDemo/ShapeType.h
+ mode change 100644 => 100755 examples/ShapesDemo/ShapeType.idl
+ mode change 100644 => 100755 examples/ShapesDemo/main.c
+ mode change 100644 => 100755 examples/SharedMemoryPubSub/CMakeLists.txt
+ mode change 100644 => 100755 examples/SharedMemoryPubSub/README.md
+ mode change 100644 => 100755 examples/SharedMemoryPubSub/main.c
+ mode change 100644 => 100755 examples/SharedMemoryReqRep/CMakeLists.txt
+ mode change 100644 => 100755 examples/SharedMemoryReqRep/README.md
+ mode change 100644 => 100755 examples/SharedMemoryReqRep/main.c
+ mode change 100644 => 100755 examples/SubscribeHelloWorld/CMakeLists.txt
+ mode change 100644 => 100755 examples/SubscribeHelloWorld/HelloWorld.c
+ mode change 100644 => 100755 examples/SubscribeHelloWorld/HelloWorld.h
+ mode change 100644 => 100755 examples/SubscribeHelloWorld/HelloWorld.idl
+ mode change 100644 => 100755 examples/SubscribeHelloWorld/README.md
+ mode change 100644 => 100755 examples/SubscribeHelloWorld/main.c
+ mode change 100644 => 100755 examples/SubscribeHelloWorldBestEffort/CMakeLists.txt
+ mode change 100644 => 100755 examples/SubscribeHelloWorldBestEffort/HelloWorld.c
+ mode change 100644 => 100755 examples/SubscribeHelloWorldBestEffort/HelloWorld.h
+ mode change 100644 => 100755 examples/SubscribeHelloWorldBestEffort/HelloWorld.idl
+ mode change 100644 => 100755 examples/SubscribeHelloWorldBestEffort/README.md
+ mode change 100644 => 100755 examples/SubscribeHelloWorldBestEffort/main.c
+ mode change 100644 => 100755 examples/SubscribeHelloWorldP2P/CMakeLists.txt
+ mode change 100644 => 100755 examples/SubscribeHelloWorldP2P/HelloWorld.c
+ mode change 100644 => 100755 examples/SubscribeHelloWorldP2P/HelloWorld.h
+ mode change 100644 => 100755 examples/SubscribeHelloWorldP2P/HelloWorld.idl
+ mode change 100644 => 100755 examples/SubscribeHelloWorldP2P/README.md
+ mode change 100644 => 100755 examples/SubscribeHelloWorldP2P/main.c
+ mode change 100644 => 100755 examples/TimeSync/CMakeLists.txt
+ mode change 100644 => 100755 examples/TimeSync/main.c
+ mode change 100644 => 100755 examples/TimeSyncWithCb/CMakeLists.txt
+ mode change 100644 => 100755 examples/TimeSyncWithCb/main.c
+ mode change 100644 => 100755 include/uxr/client/client.h
+ mode change 100644 => 100755 include/uxr/client/config.h.in
+ mode change 100644 => 100755 include/uxr/client/core/communication/communication.h
+ mode change 100644 => 100755 include/uxr/client/core/session/common_create_entities.h
+ mode change 100644 => 100755 include/uxr/client/core/session/create_entities_bin.h
+ mode change 100644 => 100755 include/uxr/client/core/session/create_entities_ref.h
+ mode change 100644 => 100755 include/uxr/client/core/session/create_entities_xml.h
+ mode change 100644 => 100755 include/uxr/client/core/session/object_id.h
+ mode change 100644 => 100755 include/uxr/client/core/session/read_access.h
+ mode change 100644 => 100755 include/uxr/client/core/session/session.h
+ mode change 100644 => 100755 include/uxr/client/core/session/session_info.h
+ mode change 100644 => 100755 include/uxr/client/core/session/stream/input_best_effort_stream.h
+ mode change 100644 => 100755 include/uxr/client/core/session/stream/input_reliable_stream.h
+ mode change 100644 => 100755 include/uxr/client/core/session/stream/output_best_effort_stream.h
+ mode change 100644 => 100755 include/uxr/client/core/session/stream/output_reliable_stream.h
+ mode change 100644 => 100755 include/uxr/client/core/session/stream/reliable_stream.h
+ mode change 100644 => 100755 include/uxr/client/core/session/stream/seq_num.h
+ mode change 100644 => 100755 include/uxr/client/core/session/stream/stream_id.h
+ mode change 100644 => 100755 include/uxr/client/core/session/stream/stream_storage.h
+ mode change 100644 => 100755 include/uxr/client/core/session/time_sync.h
+ mode change 100644 => 100755 include/uxr/client/core/session/write_access.h
+ mode change 100644 => 100755 include/uxr/client/core/type/xrce_types.h
+ mode change 100644 => 100755 include/uxr/client/defines.h
+ mode change 100644 => 100755 include/uxr/client/profile/discovery/discovery.h
+ mode change 100644 => 100755 include/uxr/client/profile/multithread/multithread.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/can/can_transport.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/can/can_transport_posix.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/custom/custom_transport.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/ip.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/tcp/tcp_transport.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/tcp/tcp_transport_freertos_plus_tcp.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/tcp/tcp_transport_posix.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/tcp/tcp_transport_posix_nopoll.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/tcp/tcp_transport_rtems_bsd_net.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/tcp/tcp_transport_windows.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/udp/udp_transport.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/udp/udp_transport_freertos_plus_tcp.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/udp/udp_transport_posix.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/udp/udp_transport_posix_nopoll.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/udp/udp_transport_rtems_bsd_net.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/ip/udp/udp_transport_windows.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/serial/serial_transport.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/serial/serial_transport_platform.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/serial/serial_transport_posix.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/serial/serial_transport_rtems_bsd_net.h
+ mode change 100644 => 100755 include/uxr/client/profile/transport/stream_framing/stream_framing_protocol.h
+ mode change 100644 => 100755 include/uxr/client/transport.h
+ mode change 100644 => 100755 include/uxr/client/util/ping.h
+ mode change 100644 => 100755 include/uxr/client/util/time.h
+ mode change 100644 => 100755 include/uxr/client/visibility.h
+ mode change 100644 => 100755 src/c/core/log/log.c
+ mode change 100644 => 100755 src/c/core/log/log_internal.h
+ mode change 100644 => 100755 src/c/core/serialization/xrce_header.c
+ mode change 100644 => 100755 src/c/core/serialization/xrce_header_internal.h
+ mode change 100644 => 100755 src/c/core/serialization/xrce_subheader.c
+ mode change 100644 => 100755 src/c/core/serialization/xrce_subheader_internal.h
+ mode change 100644 => 100755 src/c/core/serialization/xrce_types.c
+ mode change 100644 => 100755 src/c/core/session/common_create_entities.c
+ mode change 100644 => 100755 src/c/core/session/common_create_entities_internal.h
+ mode change 100644 => 100755 src/c/core/session/create_entities_bin.c
+ mode change 100644 => 100755 src/c/core/session/create_entities_ref.c
+ mode change 100644 => 100755 src/c/core/session/create_entities_xml.c
+ mode change 100644 => 100755 src/c/core/session/object_id.c
+ mode change 100644 => 100755 src/c/core/session/read_access.c
+ mode change 100644 => 100755 src/c/core/session/session.c
+ mode change 100644 => 100755 src/c/core/session/session_info.c
+ mode change 100644 => 100755 src/c/core/session/session_info_internal.h
+ mode change 100644 => 100755 src/c/core/session/session_internal.h
+ mode change 100644 => 100755 src/c/core/session/stream/common_reliable_stream_internal.h
+ mode change 100644 => 100755 src/c/core/session/stream/input_best_effort_stream.c
+ mode change 100644 => 100755 src/c/core/session/stream/input_best_effort_stream_internal.h
+ mode change 100644 => 100755 src/c/core/session/stream/input_reliable_stream.c
+ mode change 100644 => 100755 src/c/core/session/stream/input_reliable_stream_internal.h
+ mode change 100644 => 100755 src/c/core/session/stream/output_best_effort_stream.c
+ mode change 100644 => 100755 src/c/core/session/stream/output_best_effort_stream_internal.h
+ mode change 100644 => 100755 src/c/core/session/stream/output_reliable_stream.c
+ mode change 100644 => 100755 src/c/core/session/stream/output_reliable_stream_internal.h
+ mode change 100644 => 100755 src/c/core/session/stream/seq_num.c
+ mode change 100644 => 100755 src/c/core/session/stream/seq_num_internal.h
+ mode change 100644 => 100755 src/c/core/session/stream/stream_id.c
+ mode change 100644 => 100755 src/c/core/session/stream/stream_storage.c
+ mode change 100644 => 100755 src/c/core/session/stream/stream_storage_internal.h
+ mode change 100644 => 100755 src/c/core/session/submessage.c
+ mode change 100644 => 100755 src/c/core/session/submessage_internal.h
+ mode change 100644 => 100755 src/c/core/session/write_access.c
+ mode change 100644 => 100755 src/c/profile/discovery/discovery.c
+ mode change 100644 => 100755 src/c/profile/discovery/transport/udp_transport_datagram_freertos_plus_tcp.c
+ mode change 100644 => 100755 src/c/profile/discovery/transport/udp_transport_datagram_internal.h
+ mode change 100644 => 100755 src/c/profile/discovery/transport/udp_transport_datagram_posix.c
+ mode change 100644 => 100755 src/c/profile/discovery/transport/udp_transport_datagram_posix_nopoll.c
+ mode change 100644 => 100755 src/c/profile/discovery/transport/udp_transport_datagram_rtems_bsd_net.c
+ mode change 100644 => 100755 src/c/profile/discovery/transport/udp_transport_datagram_windows.c
+ mode change 100644 => 100755 src/c/profile/matching/matching.c
+ mode change 100644 => 100755 src/c/profile/matching/matching_internal.h
+ mode change 100644 => 100755 src/c/profile/multithread/multithread.c
+ mode change 100644 => 100755 src/c/profile/shared_memory/shared_memory.c
+ mode change 100644 => 100755 src/c/profile/shared_memory/shared_memory_internal.h
+ mode change 100644 => 100755 src/c/profile/transport/can/can_transport.c
+ mode change 100644 => 100755 src/c/profile/transport/can/can_transport_internal.h
+ mode change 100644 => 100755 src/c/profile/transport/can/can_transport_posix.c
+ mode change 100644 => 100755 src/c/profile/transport/custom/custom_transport.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/ip_freertos_plus_tcp.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/ip_posix.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/ip_rtems_bsd_net.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/ip_windows.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/tcp/tcp_transport.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/tcp/tcp_transport_freertos_plus_tcp.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/tcp/tcp_transport_internal.h
+ mode change 100644 => 100755 src/c/profile/transport/ip/tcp/tcp_transport_posix.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/tcp/tcp_transport_posix_nopoll.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/tcp/tcp_transport_rtems_bsd_net.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/tcp/tcp_transport_windows.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/udp/udp_transport.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/udp/udp_transport_freertos_plus_tcp.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/udp/udp_transport_internal.h
+ mode change 100644 => 100755 src/c/profile/transport/ip/udp/udp_transport_posix.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/udp/udp_transport_posix_nopoll.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/udp/udp_transport_rtems_bsd_net.c
+ mode change 100644 => 100755 src/c/profile/transport/ip/udp/udp_transport_windows.c
+ mode change 100644 => 100755 src/c/profile/transport/serial/serial_transport.c
+ mode change 100644 => 100755 src/c/profile/transport/serial/serial_transport_posix.c
+ mode change 100644 => 100755 src/c/profile/transport/serial/serial_transport_rtems_bsd_net.c
+ mode change 100644 => 100755 src/c/profile/transport/stream_framing/stream_framing_protocol.c
+ mode change 100644 => 100755 src/c/profile/transport/stream_framing/stream_framing_protocol.h
+ mode change 100644 => 100755 src/c/util/ping.c
+ mode change 100644 => 100755 src/c/util/time.c
+ mode change 100644 => 100755 src/c/util/time_internal.h
+ mode change 100644 => 100755 test/case/CMakeLists.txt
+ mode change 100644 => 100755 test/case/installation/InstallationTest.cmake
+ mode change 100644 => 100755 test/case/packaging/CMakeLists.txt
+ mode change 100644 => 100755 test/case/packaging/Packaging.cmake
+ mode change 100644 => 100755 test/case/packaging/main.c
+ mode change 100644 => 100755 test/memory/consumption/CMakeLists.txt
+ mode change 100644 => 100755 test/memory/consumption/MemoryConsumption.c
+ mode change 100644 => 100755 test/memory/consumption/performance_profile.config
+ mode change 100644 => 100755 test/memory/consumption/stack_analysis.py
+ mode change 100644 => 100755 test/memory/memory_map/complete_profile.config
+ mode change 100644 => 100755 test/memory/memory_map/core_profile.config
+ mode change 100644 => 100755 test/memory/memory_map/custom_profile.config
+ mode change 100644 => 100755 test/memory/memory_map/memory_map_analysis.py
+ mode change 100644 => 100755 test/memory/memory_map/serial_profile.config
+ mode change 100644 => 100755 test/memory/memory_map/tcp_profile.config
+ mode change 100644 => 100755 test/memory/memory_map/udp_profile.config
+ mode change 100644 => 100755 test/shared_memory/CMakeLists.txt
+ mode change 100644 => 100755 test/shared_memory/SharedMemory.cpp
+ mode change 100644 => 100755 test/transport/custom_comm/CMakeLists.txt
+ mode change 100644 => 100755 test/transport/custom_comm/CustomComm.cpp
+ mode change 100644 => 100755 test/transport/custom_comm/CustomComm.hpp
+ mode change 100644 => 100755 test/transport/serial_comm/CMakeLists.txt
+ mode change 100644 => 100755 test/transport/serial_comm/SerialComm.cpp
+ mode change 100644 => 100755 test/transport/serial_comm/SerialComm.hpp
+ mode change 100644 => 100755 test/unitary/CMakeLists.txt
+ mode change 100644 => 100755 test/unitary/session/ObjectId.cpp
+ mode change 100644 => 100755 test/unitary/session/Session.cpp
+ mode change 100644 => 100755 test/unitary/session/SessionInfo.cpp
+ mode change 100644 => 100755 test/unitary/session/Submessage.cpp
+ mode change 100644 => 100755 test/unitary/session/Utils.cpp
+ mode change 100644 => 100755 test/unitary/session/WriteReadAccess.cpp
+ mode change 100644 => 100755 test/unitary/session/streams/CommonReliableStream.cpp
+ mode change 100644 => 100755 test/unitary/session/streams/InputBestEffortStream.cpp
+ mode change 100644 => 100755 test/unitary/session/streams/InputReliableStream.cpp
+ mode change 100644 => 100755 test/unitary/session/streams/OutputBestEffortStream.cpp
+ mode change 100644 => 100755 test/unitary/session/streams/OutputReliableStream.cpp
+ mode change 100644 => 100755 test/unitary/session/streams/SeqNum.cpp
+ mode change 100644 => 100755 test/unitary/session/streams/StreamId.cpp
+ mode change 100644 => 100755 test/unitary/session/streams/StreamStorage.cpp
+ mode change 100644 => 100755 toolchains/CMakeLists.txt
+ mode change 100644 => 100755 toolchains/nuttx_toolchain.cmake
+ mode change 100644 => 100755 toolchains/raspberrypi_toolchain.cmake
+ mode change 100644 => 100755 uncrustify.cfg
+ mode change 100644 => 100755 utils/doxygen/pages/DoxygenLayout.xml
+ mode change 100644 => 100755 utils/doxygen/pages/customdoxygen.css
+ mode change 100644 => 100755 utils/doxygen/pages/eprosima_footer.html
+ mode change 100644 => 100755 utils/doxygen/pages/eprosima_header.html
+ mode change 100644 => 100755 utils/doxygen/pages/mainpage.dox
+ mode change 100644 => 100755 utils/images/logo/eProsimaLogo.jpg
+ mode change 100644 => 100755 utils/images/logo/eProsimaLogo.png
+
+diff --git a/.dockerignore b/.dockerignore
+old mode 100644
+new mode 100755
+diff --git a/.github/dco.yml b/.github/dco.yml
+old mode 100644
+new mode 100755
+diff --git a/.github/workflows/codeql-analysis.yml b/.github/workflows/codeql-analysis.yml
+old mode 100644
+new mode 100755
+diff --git a/.gitignore b/.gitignore
+old mode 100644
+new mode 100755
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f3ba001..7378f35 100755
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -20,7 +20,7 @@ cmake_minimum_required(VERSION 3.5.0 FATAL_ERROR)
+ ###############################################################################
+ # Build options
+ ###############################################################################
+-option(UCLIENT_BUILD_MICROCDR "Force local build of Micro CDR." OFF)
++option(UCLIENT_BUILD_MICROCDR "Force local build of Micro CDR." ON)
+ option(UCLIENT_SUPERBUILD "Enable superbuild compilation." ON)
+ option(UCLIENT_BUILD_TESTS "Build tests." OFF)
+ option(UCLIENT_BUILD_EXAMPLES "Build examples." OFF)
+@@ -34,8 +34,8 @@ option(BUILD_DOCUMENTATION "Use doxygen to create product documentation" OFF)
+ 
+ option(UCLIENT_BUILD_CI_TESTS "Build CI test cases." OFF)
+ if(UCLIENT_BUILD_CI_TESTS)
+-    set(UCLIENT_BUILD_TESTS ON)
+-    set(UCLIENT_BUILD_EXAMPLES ON)
++    set(UCLIENT_BUILD_TESTS OFF)
++    set(UCLIENT_BUILD_EXAMPLES OFF)
+ endif()
+ 
+ if((CMAKE_SYSTEM_NAME STREQUAL "") AND (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux"))
+@@ -127,13 +127,14 @@ endif()
+ 
+ ###############################################################################
+ # Load external eProsima projects.
+-###############################################################################
++###############################################################################i
+ set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${PROJECT_BINARY_DIR}/temp_install)
++message(CMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}")
+ 
+ foreach(d ${_deps})
+     list(GET d 0 _name)
+     list(GET d 1 _version)
+-    find_package(${_name} ${_version} EXACT REQUIRED)
++    find_package(${_name} ${_version})
+ endforeach()
+ 
+ ###############################################################################
+@@ -365,6 +366,7 @@ target_include_directories(${PROJECT_NAME}
+     PUBLIC
+         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+         $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include>
++        $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/temp_install/microcdr-${_microcdr_version}/include>
+         $<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}>
+     PRIVATE
+         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/c>
+diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md
+old mode 100644
+new mode 100755
+diff --git a/CTestConfig.cmake b/CTestConfig.cmake
+old mode 100644
+new mode 100755
+diff --git a/Dockerfile b/Dockerfile
+old mode 100644
+new mode 100755
+diff --git a/LICENSE b/LICENSE
+old mode 100644
+new mode 100755
+diff --git a/PLATFORM_SUPPORT.md b/PLATFORM_SUPPORT.md
+old mode 100644
+new mode 100755
+diff --git a/QUALITY.md b/QUALITY.md
+old mode 100644
+new mode 100755
+diff --git a/README.md b/README.md
+old mode 100644
+new mode 100755
+diff --git a/VERSIONING.md b/VERSIONING.md
+old mode 100644
+new mode 100755
+diff --git a/ci/CTestJenkins.cmake b/ci/CTestJenkins.cmake
+old mode 100644
+new mode 100755
+diff --git a/ci/linux/CMakeLists.txt b/ci/linux/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/ci/valgrind.supp b/ci/valgrind.supp
+old mode 100644
+new mode 100755
+diff --git a/ci/windows/CMakeLists.txt b/ci/windows/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/cmake/SuperBuild.cmake b/cmake/SuperBuild.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/common/check_configuration.cmake b/cmake/common/check_configuration.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/common/eprosima_libraries.cmake b/cmake/common/eprosima_libraries.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/common/gtest.cmake b/cmake/common/gtest.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/modules/FindGMock.cmake b/cmake/modules/FindGMock.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/packaging/Config.cmake.in b/cmake/packaging/Config.cmake.in
+old mode 100644
+new mode 100755
+diff --git a/colcon.pkg b/colcon.pkg
+old mode 100644
+new mode 100755
+diff --git a/docs/Client.png b/docs/Client.png
+old mode 100644
+new mode 100755
+diff --git a/docs/General.png b/docs/General.png
+old mode 100644
+new mode 100755
+diff --git a/doxyfile.in b/doxyfile.in
+old mode 100644
+new mode 100755
+diff --git a/examples/BinaryEntityCreation/CMakeLists.txt b/examples/BinaryEntityCreation/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/BinaryEntityCreation/main.c b/examples/BinaryEntityCreation/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/ContinuousFragment/CMakeLists.txt b/examples/ContinuousFragment/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/ContinuousFragment/main.c b/examples/ContinuousFragment/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/CustomTransports/CMakeLists.txt b/examples/CustomTransports/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/CustomTransports/HelloWorld.c b/examples/CustomTransports/HelloWorld.c
+old mode 100644
+new mode 100755
+diff --git a/examples/CustomTransports/HelloWorld.h b/examples/CustomTransports/HelloWorld.h
+old mode 100644
+new mode 100755
+diff --git a/examples/CustomTransports/HelloWorld.idl b/examples/CustomTransports/HelloWorld.idl
+old mode 100644
+new mode 100755
+diff --git a/examples/CustomTransports/main.c b/examples/CustomTransports/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/CustomTransports/my_custom_transport.c b/examples/CustomTransports/my_custom_transport.c
+old mode 100644
+new mode 100755
+diff --git a/examples/CustomTransports/my_custom_transport.h b/examples/CustomTransports/my_custom_transport.h
+old mode 100644
+new mode 100755
+diff --git a/examples/Deployment/CMakeLists.txt b/examples/Deployment/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/Deployment/HelloWorld.c b/examples/Deployment/HelloWorld.c
+old mode 100644
+new mode 100755
+diff --git a/examples/Deployment/HelloWorld.h b/examples/Deployment/HelloWorld.h
+old mode 100644
+new mode 100755
+diff --git a/examples/Deployment/HelloWorld.idl b/examples/Deployment/HelloWorld.idl
+old mode 100644
+new mode 100755
+diff --git a/examples/Deployment/README.md b/examples/Deployment/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/Deployment/configurator_client.c b/examples/Deployment/configurator_client.c
+old mode 100644
+new mode 100755
+diff --git a/examples/Deployment/publisher.c b/examples/Deployment/publisher.c
+old mode 100644
+new mode 100755
+diff --git a/examples/Deployment/subscriber.c b/examples/Deployment/subscriber.c
+old mode 100644
+new mode 100755
+diff --git a/examples/Discovery/CMakeLists.txt b/examples/Discovery/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/Discovery/README.md b/examples/Discovery/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/Discovery/main.c b/examples/Discovery/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/MultiSessionHelloWorld/CMakeLists.txt b/examples/MultiSessionHelloWorld/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/MultiSessionHelloWorld/HelloWorld.c b/examples/MultiSessionHelloWorld/HelloWorld.c
+old mode 100644
+new mode 100755
+diff --git a/examples/MultiSessionHelloWorld/HelloWorld.h b/examples/MultiSessionHelloWorld/HelloWorld.h
+old mode 100644
+new mode 100755
+diff --git a/examples/MultiSessionHelloWorld/HelloWorld.idl b/examples/MultiSessionHelloWorld/HelloWorld.idl
+old mode 100644
+new mode 100755
+diff --git a/examples/MultiSessionHelloWorld/README.md b/examples/MultiSessionHelloWorld/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/MultiSessionHelloWorld/main.c b/examples/MultiSessionHelloWorld/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/PingAgent/CMakeLists.txt b/examples/PingAgent/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/PingAgent/Serial/CMakeLists.txt b/examples/PingAgent/Serial/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/PingAgent/Serial/main.c b/examples/PingAgent/Serial/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/PingAgent/TCP/CMakeLists.txt b/examples/PingAgent/TCP/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/PingAgent/TCP/main.c b/examples/PingAgent/TCP/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/PingAgent/UDP/CMakeLists.txt b/examples/PingAgent/UDP/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/PingAgent/UDP/main.c b/examples/PingAgent/UDP/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorld/CMakeLists.txt b/examples/PublishHelloWorld/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorld/HelloWorld.c b/examples/PublishHelloWorld/HelloWorld.c
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorld/HelloWorld.h b/examples/PublishHelloWorld/HelloWorld.h
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorld/HelloWorld.idl b/examples/PublishHelloWorld/HelloWorld.idl
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorld/README.md b/examples/PublishHelloWorld/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorld/main.c b/examples/PublishHelloWorld/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldBestEffort/CMakeLists.txt b/examples/PublishHelloWorldBestEffort/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldBestEffort/HelloWorld.c b/examples/PublishHelloWorldBestEffort/HelloWorld.c
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldBestEffort/HelloWorld.h b/examples/PublishHelloWorldBestEffort/HelloWorld.h
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldBestEffort/HelloWorld.idl b/examples/PublishHelloWorldBestEffort/HelloWorld.idl
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldBestEffort/README.md b/examples/PublishHelloWorldBestEffort/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldBestEffort/main.c b/examples/PublishHelloWorldBestEffort/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldCAN/CMakeLists.txt b/examples/PublishHelloWorldCAN/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldCAN/HelloWorld.c b/examples/PublishHelloWorldCAN/HelloWorld.c
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldCAN/HelloWorld.h b/examples/PublishHelloWorldCAN/HelloWorld.h
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldCAN/HelloWorld.idl b/examples/PublishHelloWorldCAN/HelloWorld.idl
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldCAN/README.md b/examples/PublishHelloWorldCAN/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldCAN/main.c b/examples/PublishHelloWorldCAN/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldP2P/CMakeLists.txt b/examples/PublishHelloWorldP2P/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldP2P/HelloWorld.c b/examples/PublishHelloWorldP2P/HelloWorld.c
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldP2P/HelloWorld.h b/examples/PublishHelloWorldP2P/HelloWorld.h
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldP2P/HelloWorld.idl b/examples/PublishHelloWorldP2P/HelloWorld.idl
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldP2P/README.md b/examples/PublishHelloWorldP2P/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/PublishHelloWorldP2P/main.c b/examples/PublishHelloWorldP2P/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/ReplyAdder/CMakeLists.txt b/examples/ReplyAdder/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/ReplyAdder/main.c b/examples/ReplyAdder/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/RequestAdder/CMakeLists.txt b/examples/RequestAdder/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/RequestAdder/main.c b/examples/RequestAdder/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/ShapesDemo/CMakeLists.txt b/examples/ShapesDemo/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/ShapesDemo/README.md b/examples/ShapesDemo/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/ShapesDemo/ShapeType.c b/examples/ShapesDemo/ShapeType.c
+old mode 100644
+new mode 100755
+diff --git a/examples/ShapesDemo/ShapeType.h b/examples/ShapesDemo/ShapeType.h
+old mode 100644
+new mode 100755
+diff --git a/examples/ShapesDemo/ShapeType.idl b/examples/ShapesDemo/ShapeType.idl
+old mode 100644
+new mode 100755
+diff --git a/examples/ShapesDemo/main.c b/examples/ShapesDemo/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/SharedMemoryPubSub/CMakeLists.txt b/examples/SharedMemoryPubSub/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/SharedMemoryPubSub/README.md b/examples/SharedMemoryPubSub/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/SharedMemoryPubSub/main.c b/examples/SharedMemoryPubSub/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/SharedMemoryReqRep/CMakeLists.txt b/examples/SharedMemoryReqRep/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/SharedMemoryReqRep/README.md b/examples/SharedMemoryReqRep/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/SharedMemoryReqRep/main.c b/examples/SharedMemoryReqRep/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorld/CMakeLists.txt b/examples/SubscribeHelloWorld/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorld/HelloWorld.c b/examples/SubscribeHelloWorld/HelloWorld.c
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorld/HelloWorld.h b/examples/SubscribeHelloWorld/HelloWorld.h
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorld/HelloWorld.idl b/examples/SubscribeHelloWorld/HelloWorld.idl
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorld/README.md b/examples/SubscribeHelloWorld/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorld/main.c b/examples/SubscribeHelloWorld/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorldBestEffort/CMakeLists.txt b/examples/SubscribeHelloWorldBestEffort/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorldBestEffort/HelloWorld.c b/examples/SubscribeHelloWorldBestEffort/HelloWorld.c
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorldBestEffort/HelloWorld.h b/examples/SubscribeHelloWorldBestEffort/HelloWorld.h
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorldBestEffort/HelloWorld.idl b/examples/SubscribeHelloWorldBestEffort/HelloWorld.idl
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorldBestEffort/README.md b/examples/SubscribeHelloWorldBestEffort/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorldBestEffort/main.c b/examples/SubscribeHelloWorldBestEffort/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorldP2P/CMakeLists.txt b/examples/SubscribeHelloWorldP2P/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorldP2P/HelloWorld.c b/examples/SubscribeHelloWorldP2P/HelloWorld.c
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorldP2P/HelloWorld.h b/examples/SubscribeHelloWorldP2P/HelloWorld.h
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorldP2P/HelloWorld.idl b/examples/SubscribeHelloWorldP2P/HelloWorld.idl
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorldP2P/README.md b/examples/SubscribeHelloWorldP2P/README.md
+old mode 100644
+new mode 100755
+diff --git a/examples/SubscribeHelloWorldP2P/main.c b/examples/SubscribeHelloWorldP2P/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/TimeSync/CMakeLists.txt b/examples/TimeSync/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/TimeSync/main.c b/examples/TimeSync/main.c
+old mode 100644
+new mode 100755
+diff --git a/examples/TimeSyncWithCb/CMakeLists.txt b/examples/TimeSyncWithCb/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/TimeSyncWithCb/main.c b/examples/TimeSyncWithCb/main.c
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/client.h b/include/uxr/client/client.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/config.h.in b/include/uxr/client/config.h.in
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/communication/communication.h b/include/uxr/client/core/communication/communication.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/common_create_entities.h b/include/uxr/client/core/session/common_create_entities.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/create_entities_bin.h b/include/uxr/client/core/session/create_entities_bin.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/create_entities_ref.h b/include/uxr/client/core/session/create_entities_ref.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/create_entities_xml.h b/include/uxr/client/core/session/create_entities_xml.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/object_id.h b/include/uxr/client/core/session/object_id.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/read_access.h b/include/uxr/client/core/session/read_access.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/session.h b/include/uxr/client/core/session/session.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/session_info.h b/include/uxr/client/core/session/session_info.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/stream/input_best_effort_stream.h b/include/uxr/client/core/session/stream/input_best_effort_stream.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/stream/input_reliable_stream.h b/include/uxr/client/core/session/stream/input_reliable_stream.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/stream/output_best_effort_stream.h b/include/uxr/client/core/session/stream/output_best_effort_stream.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/stream/output_reliable_stream.h b/include/uxr/client/core/session/stream/output_reliable_stream.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/stream/reliable_stream.h b/include/uxr/client/core/session/stream/reliable_stream.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/stream/seq_num.h b/include/uxr/client/core/session/stream/seq_num.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/stream/stream_id.h b/include/uxr/client/core/session/stream/stream_id.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/stream/stream_storage.h b/include/uxr/client/core/session/stream/stream_storage.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/time_sync.h b/include/uxr/client/core/session/time_sync.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/session/write_access.h b/include/uxr/client/core/session/write_access.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/core/type/xrce_types.h b/include/uxr/client/core/type/xrce_types.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/defines.h b/include/uxr/client/defines.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/discovery/discovery.h b/include/uxr/client/profile/discovery/discovery.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/multithread/multithread.h b/include/uxr/client/profile/multithread/multithread.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/can/can_transport.h b/include/uxr/client/profile/transport/can/can_transport.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/can/can_transport_posix.h b/include/uxr/client/profile/transport/can/can_transport_posix.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/custom/custom_transport.h b/include/uxr/client/profile/transport/custom/custom_transport.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/ip.h b/include/uxr/client/profile/transport/ip/ip.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/tcp/tcp_transport.h b/include/uxr/client/profile/transport/ip/tcp/tcp_transport.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/tcp/tcp_transport_freertos_plus_tcp.h b/include/uxr/client/profile/transport/ip/tcp/tcp_transport_freertos_plus_tcp.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/tcp/tcp_transport_posix.h b/include/uxr/client/profile/transport/ip/tcp/tcp_transport_posix.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/tcp/tcp_transport_posix_nopoll.h b/include/uxr/client/profile/transport/ip/tcp/tcp_transport_posix_nopoll.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/tcp/tcp_transport_rtems_bsd_net.h b/include/uxr/client/profile/transport/ip/tcp/tcp_transport_rtems_bsd_net.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/tcp/tcp_transport_windows.h b/include/uxr/client/profile/transport/ip/tcp/tcp_transport_windows.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/udp/udp_transport.h b/include/uxr/client/profile/transport/ip/udp/udp_transport.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/udp/udp_transport_freertos_plus_tcp.h b/include/uxr/client/profile/transport/ip/udp/udp_transport_freertos_plus_tcp.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/udp/udp_transport_posix.h b/include/uxr/client/profile/transport/ip/udp/udp_transport_posix.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/udp/udp_transport_posix_nopoll.h b/include/uxr/client/profile/transport/ip/udp/udp_transport_posix_nopoll.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/udp/udp_transport_rtems_bsd_net.h b/include/uxr/client/profile/transport/ip/udp/udp_transport_rtems_bsd_net.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/ip/udp/udp_transport_windows.h b/include/uxr/client/profile/transport/ip/udp/udp_transport_windows.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/serial/serial_transport.h b/include/uxr/client/profile/transport/serial/serial_transport.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/serial/serial_transport_platform.h b/include/uxr/client/profile/transport/serial/serial_transport_platform.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/serial/serial_transport_posix.h b/include/uxr/client/profile/transport/serial/serial_transport_posix.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/serial/serial_transport_rtems_bsd_net.h b/include/uxr/client/profile/transport/serial/serial_transport_rtems_bsd_net.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/profile/transport/stream_framing/stream_framing_protocol.h b/include/uxr/client/profile/transport/stream_framing/stream_framing_protocol.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/transport.h b/include/uxr/client/transport.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/util/ping.h b/include/uxr/client/util/ping.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/util/time.h b/include/uxr/client/util/time.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/client/visibility.h b/include/uxr/client/visibility.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/log/log.c b/src/c/core/log/log.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/log/log_internal.h b/src/c/core/log/log_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/serialization/xrce_header.c b/src/c/core/serialization/xrce_header.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/serialization/xrce_header_internal.h b/src/c/core/serialization/xrce_header_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/serialization/xrce_subheader.c b/src/c/core/serialization/xrce_subheader.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/serialization/xrce_subheader_internal.h b/src/c/core/serialization/xrce_subheader_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/serialization/xrce_types.c b/src/c/core/serialization/xrce_types.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/common_create_entities.c b/src/c/core/session/common_create_entities.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/common_create_entities_internal.h b/src/c/core/session/common_create_entities_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/create_entities_bin.c b/src/c/core/session/create_entities_bin.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/create_entities_ref.c b/src/c/core/session/create_entities_ref.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/create_entities_xml.c b/src/c/core/session/create_entities_xml.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/object_id.c b/src/c/core/session/object_id.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/read_access.c b/src/c/core/session/read_access.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/session.c b/src/c/core/session/session.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/session_info.c b/src/c/core/session/session_info.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/session_info_internal.h b/src/c/core/session/session_info_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/session_internal.h b/src/c/core/session/session_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/common_reliable_stream_internal.h b/src/c/core/session/stream/common_reliable_stream_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/input_best_effort_stream.c b/src/c/core/session/stream/input_best_effort_stream.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/input_best_effort_stream_internal.h b/src/c/core/session/stream/input_best_effort_stream_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/input_reliable_stream.c b/src/c/core/session/stream/input_reliable_stream.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/input_reliable_stream_internal.h b/src/c/core/session/stream/input_reliable_stream_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/output_best_effort_stream.c b/src/c/core/session/stream/output_best_effort_stream.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/output_best_effort_stream_internal.h b/src/c/core/session/stream/output_best_effort_stream_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/output_reliable_stream.c b/src/c/core/session/stream/output_reliable_stream.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/output_reliable_stream_internal.h b/src/c/core/session/stream/output_reliable_stream_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/seq_num.c b/src/c/core/session/stream/seq_num.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/seq_num_internal.h b/src/c/core/session/stream/seq_num_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/stream_id.c b/src/c/core/session/stream/stream_id.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/stream_storage.c b/src/c/core/session/stream/stream_storage.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/stream/stream_storage_internal.h b/src/c/core/session/stream/stream_storage_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/submessage.c b/src/c/core/session/submessage.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/submessage_internal.h b/src/c/core/session/submessage_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/core/session/write_access.c b/src/c/core/session/write_access.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/discovery/discovery.c b/src/c/profile/discovery/discovery.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/discovery/transport/udp_transport_datagram_freertos_plus_tcp.c b/src/c/profile/discovery/transport/udp_transport_datagram_freertos_plus_tcp.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/discovery/transport/udp_transport_datagram_internal.h b/src/c/profile/discovery/transport/udp_transport_datagram_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/discovery/transport/udp_transport_datagram_posix.c b/src/c/profile/discovery/transport/udp_transport_datagram_posix.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/discovery/transport/udp_transport_datagram_posix_nopoll.c b/src/c/profile/discovery/transport/udp_transport_datagram_posix_nopoll.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/discovery/transport/udp_transport_datagram_rtems_bsd_net.c b/src/c/profile/discovery/transport/udp_transport_datagram_rtems_bsd_net.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/discovery/transport/udp_transport_datagram_windows.c b/src/c/profile/discovery/transport/udp_transport_datagram_windows.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/matching/matching.c b/src/c/profile/matching/matching.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/matching/matching_internal.h b/src/c/profile/matching/matching_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/multithread/multithread.c b/src/c/profile/multithread/multithread.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/shared_memory/shared_memory.c b/src/c/profile/shared_memory/shared_memory.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/shared_memory/shared_memory_internal.h b/src/c/profile/shared_memory/shared_memory_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/can/can_transport.c b/src/c/profile/transport/can/can_transport.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/can/can_transport_internal.h b/src/c/profile/transport/can/can_transport_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/can/can_transport_posix.c b/src/c/profile/transport/can/can_transport_posix.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/custom/custom_transport.c b/src/c/profile/transport/custom/custom_transport.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/ip_freertos_plus_tcp.c b/src/c/profile/transport/ip/ip_freertos_plus_tcp.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/ip_posix.c b/src/c/profile/transport/ip/ip_posix.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/ip_rtems_bsd_net.c b/src/c/profile/transport/ip/ip_rtems_bsd_net.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/ip_windows.c b/src/c/profile/transport/ip/ip_windows.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/tcp/tcp_transport.c b/src/c/profile/transport/ip/tcp/tcp_transport.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/tcp/tcp_transport_freertos_plus_tcp.c b/src/c/profile/transport/ip/tcp/tcp_transport_freertos_plus_tcp.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/tcp/tcp_transport_internal.h b/src/c/profile/transport/ip/tcp/tcp_transport_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/tcp/tcp_transport_posix.c b/src/c/profile/transport/ip/tcp/tcp_transport_posix.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/tcp/tcp_transport_posix_nopoll.c b/src/c/profile/transport/ip/tcp/tcp_transport_posix_nopoll.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/tcp/tcp_transport_rtems_bsd_net.c b/src/c/profile/transport/ip/tcp/tcp_transport_rtems_bsd_net.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/tcp/tcp_transport_windows.c b/src/c/profile/transport/ip/tcp/tcp_transport_windows.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/udp/udp_transport.c b/src/c/profile/transport/ip/udp/udp_transport.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/udp/udp_transport_freertos_plus_tcp.c b/src/c/profile/transport/ip/udp/udp_transport_freertos_plus_tcp.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/udp/udp_transport_internal.h b/src/c/profile/transport/ip/udp/udp_transport_internal.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/udp/udp_transport_posix.c b/src/c/profile/transport/ip/udp/udp_transport_posix.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/udp/udp_transport_posix_nopoll.c b/src/c/profile/transport/ip/udp/udp_transport_posix_nopoll.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/udp/udp_transport_rtems_bsd_net.c b/src/c/profile/transport/ip/udp/udp_transport_rtems_bsd_net.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/ip/udp/udp_transport_windows.c b/src/c/profile/transport/ip/udp/udp_transport_windows.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/serial/serial_transport.c b/src/c/profile/transport/serial/serial_transport.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/serial/serial_transport_posix.c b/src/c/profile/transport/serial/serial_transport_posix.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/serial/serial_transport_rtems_bsd_net.c b/src/c/profile/transport/serial/serial_transport_rtems_bsd_net.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/stream_framing/stream_framing_protocol.c b/src/c/profile/transport/stream_framing/stream_framing_protocol.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/profile/transport/stream_framing/stream_framing_protocol.h b/src/c/profile/transport/stream_framing/stream_framing_protocol.h
+old mode 100644
+new mode 100755
+diff --git a/src/c/util/ping.c b/src/c/util/ping.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/util/time.c b/src/c/util/time.c
+old mode 100644
+new mode 100755
+diff --git a/src/c/util/time_internal.h b/src/c/util/time_internal.h
+old mode 100644
+new mode 100755
+diff --git a/test/case/CMakeLists.txt b/test/case/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/case/installation/InstallationTest.cmake b/test/case/installation/InstallationTest.cmake
+old mode 100644
+new mode 100755
+diff --git a/test/case/packaging/CMakeLists.txt b/test/case/packaging/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/case/packaging/Packaging.cmake b/test/case/packaging/Packaging.cmake
+old mode 100644
+new mode 100755
+diff --git a/test/case/packaging/main.c b/test/case/packaging/main.c
+old mode 100644
+new mode 100755
+diff --git a/test/memory/consumption/CMakeLists.txt b/test/memory/consumption/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/memory/consumption/MemoryConsumption.c b/test/memory/consumption/MemoryConsumption.c
+old mode 100644
+new mode 100755
+diff --git a/test/memory/consumption/performance_profile.config b/test/memory/consumption/performance_profile.config
+old mode 100644
+new mode 100755
+diff --git a/test/memory/consumption/stack_analysis.py b/test/memory/consumption/stack_analysis.py
+old mode 100644
+new mode 100755
+diff --git a/test/memory/memory_map/complete_profile.config b/test/memory/memory_map/complete_profile.config
+old mode 100644
+new mode 100755
+diff --git a/test/memory/memory_map/core_profile.config b/test/memory/memory_map/core_profile.config
+old mode 100644
+new mode 100755
+diff --git a/test/memory/memory_map/custom_profile.config b/test/memory/memory_map/custom_profile.config
+old mode 100644
+new mode 100755
+diff --git a/test/memory/memory_map/memory_map_analysis.py b/test/memory/memory_map/memory_map_analysis.py
+old mode 100644
+new mode 100755
+diff --git a/test/memory/memory_map/serial_profile.config b/test/memory/memory_map/serial_profile.config
+old mode 100644
+new mode 100755
+diff --git a/test/memory/memory_map/tcp_profile.config b/test/memory/memory_map/tcp_profile.config
+old mode 100644
+new mode 100755
+diff --git a/test/memory/memory_map/udp_profile.config b/test/memory/memory_map/udp_profile.config
+old mode 100644
+new mode 100755
+diff --git a/test/shared_memory/CMakeLists.txt b/test/shared_memory/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/shared_memory/SharedMemory.cpp b/test/shared_memory/SharedMemory.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/transport/custom_comm/CMakeLists.txt b/test/transport/custom_comm/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/transport/custom_comm/CustomComm.cpp b/test/transport/custom_comm/CustomComm.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/transport/custom_comm/CustomComm.hpp b/test/transport/custom_comm/CustomComm.hpp
+old mode 100644
+new mode 100755
+diff --git a/test/transport/serial_comm/CMakeLists.txt b/test/transport/serial_comm/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/transport/serial_comm/SerialComm.cpp b/test/transport/serial_comm/SerialComm.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/transport/serial_comm/SerialComm.hpp b/test/transport/serial_comm/SerialComm.hpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/CMakeLists.txt b/test/unitary/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/ObjectId.cpp b/test/unitary/session/ObjectId.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/Session.cpp b/test/unitary/session/Session.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/SessionInfo.cpp b/test/unitary/session/SessionInfo.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/Submessage.cpp b/test/unitary/session/Submessage.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/Utils.cpp b/test/unitary/session/Utils.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/WriteReadAccess.cpp b/test/unitary/session/WriteReadAccess.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/streams/CommonReliableStream.cpp b/test/unitary/session/streams/CommonReliableStream.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/streams/InputBestEffortStream.cpp b/test/unitary/session/streams/InputBestEffortStream.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/streams/InputReliableStream.cpp b/test/unitary/session/streams/InputReliableStream.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/streams/OutputBestEffortStream.cpp b/test/unitary/session/streams/OutputBestEffortStream.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/streams/OutputReliableStream.cpp b/test/unitary/session/streams/OutputReliableStream.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/streams/SeqNum.cpp b/test/unitary/session/streams/SeqNum.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/streams/StreamId.cpp b/test/unitary/session/streams/StreamId.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unitary/session/streams/StreamStorage.cpp b/test/unitary/session/streams/StreamStorage.cpp
+old mode 100644
+new mode 100755
+diff --git a/toolchains/CMakeLists.txt b/toolchains/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/toolchains/nuttx_toolchain.cmake b/toolchains/nuttx_toolchain.cmake
+old mode 100644
+new mode 100755
+diff --git a/toolchains/raspberrypi_toolchain.cmake b/toolchains/raspberrypi_toolchain.cmake
+old mode 100644
+new mode 100755
+diff --git a/uncrustify.cfg b/uncrustify.cfg
+old mode 100644
+new mode 100755
+diff --git a/utils/doxygen/pages/DoxygenLayout.xml b/utils/doxygen/pages/DoxygenLayout.xml
+old mode 100644
+new mode 100755
+diff --git a/utils/doxygen/pages/customdoxygen.css b/utils/doxygen/pages/customdoxygen.css
+old mode 100644
+new mode 100755
+diff --git a/utils/doxygen/pages/eprosima_footer.html b/utils/doxygen/pages/eprosima_footer.html
+old mode 100644
+new mode 100755
+diff --git a/utils/doxygen/pages/eprosima_header.html b/utils/doxygen/pages/eprosima_header.html
+old mode 100644
+new mode 100755
+diff --git a/utils/doxygen/pages/mainpage.dox b/utils/doxygen/pages/mainpage.dox
+old mode 100644
+new mode 100755
+diff --git a/utils/images/logo/eProsimaLogo.jpg b/utils/images/logo/eProsimaLogo.jpg
+old mode 100644
+new mode 100755
+diff --git a/utils/images/logo/eProsimaLogo.png b/utils/images/logo/eProsimaLogo.png
+old mode 100644
+new mode 100755
