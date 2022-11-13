@@ -1,0 +1,1109 @@
+From ab5d1d400ec7f5a14f12f0a68f1120c3582eb534 Mon Sep 17 00:00:00 2001
+From: dirksavage88 <dirksavage88@gmail.com>
+Date: Sat, 12 Nov 2022 20:54:15 -0500
+Subject: [PATCH] buildable xrce-dds agent
+
+Signed-off-by: dirksavage88 <dirksavage88@gmail.com>
+---
+ .dockerignore                                  |   0
+ .gitattributes                                 |   0
+ .github/ISSUE_TEMPLATE/general-issue.md        |   0
+ .gitignore                                     |   0
+ CMakeLists.txt                                 |  17 +++++++++--------
+ CTestConfig.cmake                              |   0
+ Dockerfile                                     |   0
+ LICENSE                                        |   0
+ README.md                                      |   0
+ agent.refs                                     |   0
+ ci/CTestJenkins.cmake                          |   0
+ ci/linux/CMakeLists.txt                        |   0
+ ci/valgrind.supp                               |   0
+ ci/windows/CMakeLists.txt                      |   0
+ cmake/Soversion.cmake                          |   0
+ cmake/SuperBuild.cmake                         |   0
+ cmake/common/check_configuration.cmake         |   0
+ cmake/common/eprosima_libraries.cmake          |   0
+ cmake/common/gtest.cmake                       |   0
+ cmake/modules/FindAsio.cmake                   |   0
+ cmake/modules/FindGMock.cmake                  |   0
+ cmake/modules/FindTinyXML2.cmake               |   0
+ cmake/modules/Findandroid-ifaddrs.cmake        |   0
+ cmake/packaging/Config.cmake.in                |   0
+ cmake/packaging/eProsimaPackaging.cmake        |   0
+ .../windows/InstallRedistributables.nsh.in     |   0
+ cmake/packaging/windows/NSIS.template.in       |   0
+ cmake/packaging/windows/NSISPackaging.cmake.in |   0
+ colcon.pkg                                     |   0
+ docs/Agent.png                                 | Bin
+ docs/General.png                               | Bin
+ examples/custom_agent/CMakeLists.txt           |   0
+ examples/custom_agent/custom_agent.cpp         |   0
+ include/uxr/agent/Agent.hpp                    |   0
+ include/uxr/agent/AgentInstance.hpp            |   0
+ include/uxr/agent/Root.hpp                     |   0
+ include/uxr/agent/client/ProxyClient.hpp       |   0
+ include/uxr/agent/client/session/Session.hpp   |   0
+ .../uxr/agent/client/session/SessionInfo.hpp   |   0
+ .../client/session/stream/InputStream.hpp      |   0
+ .../client/session/stream/OutputStream.hpp     |   0
+ include/uxr/agent/config.hpp.in                |   0
+ include/uxr/agent/datareader/DataReader.hpp    |   0
+ include/uxr/agent/datawriter/DataWriter.hpp    |   0
+ include/uxr/agent/logger/Logger.hpp            |   0
+ include/uxr/agent/message/InputMessage.hpp     |   0
+ include/uxr/agent/message/OutputMessage.hpp    |   0
+ include/uxr/agent/message/Packet.hpp           |   0
+ include/uxr/agent/middleware/Middleware.hpp    |   0
+ .../uxr/agent/middleware/ced/CedEntities.hpp   |   0
+ .../uxr/agent/middleware/ced/CedMiddleware.hpp |   0
+ .../uxr/agent/middleware/fast/FastEntities.hpp |   0
+ .../agent/middleware/fast/FastMiddleware.hpp   |   0
+ .../middleware/fastdds/FastDDSEntities.hpp     |   0
+ .../middleware/fastdds/FastDDSMiddleware.hpp   |   0
+ .../uxr/agent/middleware/utils/Callbacks.hpp   |   0
+ include/uxr/agent/object/XRCEObject.hpp        |   0
+ include/uxr/agent/p2p/InternalClient.hpp       |   0
+ .../uxr/agent/p2p/InternalClientManager.hpp    |   0
+ include/uxr/agent/participant/Participant.hpp  |   0
+ include/uxr/agent/processor/Processor.hpp      |   0
+ include/uxr/agent/publisher/Publisher.hpp      |   0
+ include/uxr/agent/reader/Reader.hpp            |   0
+ include/uxr/agent/replier/Replier.hpp          |   0
+ include/uxr/agent/requester/Requester.hpp      |   0
+ .../uxr/agent/scheduler/PacketScheduler.hpp    |   0
+ include/uxr/agent/scheduler/Scheduler.hpp      |   0
+ include/uxr/agent/subscriber/Subscriber.hpp    |   0
+ include/uxr/agent/topic/Topic.hpp              |   0
+ include/uxr/agent/transport/Server.hpp         |   0
+ include/uxr/agent/transport/SessionManager.hpp |   0
+ include/uxr/agent/transport/TransportRc.hpp    |   0
+ .../uxr/agent/transport/can/CanAgentLinux.hpp  |   0
+ .../uxr/agent/transport/custom/CustomAgent.hpp |   0
+ .../transport/discovery/DiscoveryServer.hpp    |   0
+ .../discovery/DiscoveryServerLinux.hpp         |   0
+ .../discovery/DiscoveryServerWindows.hpp       |   0
+ .../agent/transport/endpoint/CanEndPoint.hpp   |   0
+ .../transport/endpoint/CustomEndPoint.hpp      |   0
+ .../agent/transport/endpoint/IPv4EndPoint.hpp  |   0
+ .../agent/transport/endpoint/IPv6EndPoint.hpp  |   0
+ .../transport/endpoint/MultiSerialEndPoint.hpp |   0
+ .../transport/endpoint/SerialEndPoint.hpp      |   0
+ .../agent/transport/p2p/AgentDiscoverer.hpp    |   0
+ .../transport/p2p/AgentDiscovererLinux.hpp     |   0
+ .../transport/serial/MultiSerialAgentLinux.hpp |   0
+ .../serial/MultiTermiosAgentLinux.hpp          |   0
+ .../serial/PseudoTerminalAgentLinux.hpp        |   0
+ .../transport/serial/SerialAgentLinux.hpp      |   0
+ .../transport/serial/TermiosAgentLinux.hpp     |   0
+ .../transport/serial/baud_rate_table_linux.h   |   0
+ .../stream_framing/StreamFramingProtocol.hpp   |   0
+ .../uxr/agent/transport/tcp/TCPConnection.hpp  |   0
+ .../uxr/agent/transport/tcp/TCPServerBase.hpp  |   0
+ .../agent/transport/tcp/TCPv4AgentLinux.hpp    |   0
+ .../agent/transport/tcp/TCPv4AgentWindows.hpp  |   0
+ .../agent/transport/tcp/TCPv6AgentLinux.hpp    |   0
+ .../agent/transport/tcp/TCPv6AgentWindows.hpp  |   0
+ .../agent/transport/udp/UDPv4AgentLinux.hpp    |   0
+ .../agent/transport/udp/UDPv4AgentWindows.hpp  |   0
+ .../agent/transport/udp/UDPv6AgentLinux.hpp    |   0
+ .../agent/transport/udp/UDPv6AgentWindows.hpp  |   0
+ .../agent/transport/util/InterfaceLinux.hpp    |   0
+ .../agent/transport/util/InterfaceWindows.hpp  |   0
+ include/uxr/agent/types/MessageHeader.hpp      |   0
+ include/uxr/agent/types/Optional.hpp           |   0
+ include/uxr/agent/types/SubMessageHeader.hpp   |   0
+ include/uxr/agent/types/TopicPubSubType.hpp    |   0
+ include/uxr/agent/types/XRCETypes.hpp          |   0
+ include/uxr/agent/utils/ArgumentParser.hpp     |   0
+ include/uxr/agent/utils/Color.hpp              |   0
+ include/uxr/agent/utils/Conversion.hpp         |   0
+ include/uxr/agent/utils/Functions.hpp          |   0
+ include/uxr/agent/utils/SeqNum.hpp             |   0
+ include/uxr/agent/utils/SharedMutex.hpp        |   0
+ .../uxr/agent/utils/SharedMutexPriority.hpp    |   0
+ include/uxr/agent/utils/Time.hpp               |   0
+ include/uxr/agent/utils/TokenBucket.hpp        |   0
+ include/uxr/agent/visibility.hpp               |   0
+ microxrce_agent.cpp                            |   0
+ snap/snapcraft.yaml                            |   0
+ src/cpp/Agent.cpp                              |   0
+ src/cpp/AgentInstance.cpp                      |   0
+ src/cpp/Root.cpp                               |   0
+ src/cpp/client/ProxyClient.cpp                 |   0
+ src/cpp/datareader/DataReader.cpp              |   0
+ src/cpp/datawriter/DataWriter.cpp              |   0
+ src/cpp/message/InputMessage.cpp               |   0
+ src/cpp/message/OutputMessage.cpp              |   0
+ src/cpp/middleware/ced/CedEntities.cpp         |   0
+ src/cpp/middleware/ced/CedMiddleware.cpp       |   0
+ src/cpp/middleware/fast/FastEntities.cpp       |   0
+ src/cpp/middleware/fast/FastMiddleware.cpp     |   0
+ src/cpp/middleware/fastdds/FastDDSEntities.cpp |   0
+ .../middleware/fastdds/FastDDSMiddleware.cpp   |   0
+ src/cpp/object/XRCEObject.cpp                  |   0
+ src/cpp/p2p/InternalClient.cpp                 |   0
+ src/cpp/p2p/InternalClientManager.cpp          |   0
+ src/cpp/participant/Participant.cpp            |   0
+ src/cpp/processor/Processor.cpp                |   0
+ src/cpp/publisher/Publisher.cpp                |   0
+ src/cpp/replier/Replier.cpp                    |   0
+ src/cpp/requester/Requester.cpp                |   0
+ src/cpp/subscriber/Subscriber.cpp              |   0
+ src/cpp/topic/Topic.cpp                        |   0
+ src/cpp/transport/Server.cpp                   |   0
+ src/cpp/transport/can/CanAgentLinux.cpp        |   0
+ src/cpp/transport/custom/CustomAgent.cpp       |   0
+ .../transport/discovery/DiscoveryServer.cpp    |   0
+ .../discovery/DiscoveryServerLinux.cpp         |   0
+ .../discovery/DiscoveryServerWindows.cpp       |   0
+ src/cpp/transport/p2p/AgentDiscoverer.cpp      |   0
+ src/cpp/transport/p2p/AgentDiscovererLinux.cpp |   0
+ .../transport/serial/MultiSerialAgentLinux.cpp |   0
+ .../serial/MultiTermiosAgentLinux.cpp          |   0
+ .../serial/PseudoTerminalAgentLinux.cpp        |   0
+ src/cpp/transport/serial/SerialAgentLinux.cpp  |   0
+ src/cpp/transport/serial/TermiosAgentLinux.cpp |   0
+ .../stream_framing/StreamFramingProtocol.cpp   |   0
+ src/cpp/transport/tcp/TCPv4AgentLinux.cpp      |   0
+ src/cpp/transport/tcp/TCPv4AgentWindows.cpp    |   0
+ src/cpp/transport/tcp/TCPv6AgentLinux.cpp      |   0
+ src/cpp/transport/tcp/TCPv6AgentWindows.cpp    |   0
+ src/cpp/transport/udp/UDPv4AgentLinux.cpp      |   0
+ src/cpp/transport/udp/UDPv4AgentWindows.cpp    |   0
+ src/cpp/transport/udp/UDPv6AgentLinux.cpp      |   0
+ src/cpp/transport/udp/UDPv6AgentWindows.cpp    |   0
+ src/cpp/types/MessageHeader.cpp                |   0
+ src/cpp/types/SubMessageHeader.cpp             |   0
+ src/cpp/types/TopicPubSubType.cpp              |   0
+ src/cpp/types/XRCETypes.cpp                    |   0
+ src/cpp/utils/ArgumentParser.cpp               |   0
+ src/cpp/xmlobjects/xmlobjects.cpp              |   0
+ src/cpp/xmlobjects/xmlobjects.h                |   0
+ test/agent.refs                                |   0
+ test/blackbox/tree/CMakeLists.txt              |   0
+ test/blackbox/tree/TreeTests.cpp               |   0
+ test/case/CMakeLists.txt                       |   0
+ test/case/installation/InstallationTest.cmake  |   0
+ test/case/packaging/CMakeLists.txt             |   0
+ test/case/packaging/Packaging.cmake            |   0
+ test/case/packaging/main.cpp                   |   0
+ test/cmake/CMakeLists.txt                      |   0
+ test/cmake/main.cpp                            |   0
+ .../uxr/agent/middleware/Middleware.hpp        |   0
+ .../agent/middleware/fast/FastMiddleware.hpp   |   0
+ .../uxr/agent/client/ProxyClient.hpp           |   0
+ test/unittest/CMakeLists.txt                   |   0
+ test/unittest/Common.cpp                       |   0
+ test/unittest/Common.h                         |   0
+ test/unittest/RootTests.cpp                    |   0
+ test/unittest/agent/AgentUnitTests.cpp         |   0
+ test/unittest/agent/CMakeLists.txt             |   0
+ .../client/session/stream/CMakeLists.txt       |   0
+ .../client/session/stream/InputStreamTest.cpp  |   0
+ .../client/session/stream/OutputStreamTest.cpp |   0
+ test/unittest/middleware/ced/CMakeLists.txt    |   0
+ .../middleware/ced/CedMiddlewareTests.cpp      |   0
+ test/unittest/root/DataReaderTests.cpp         |   0
+ test/unittest/root/DataReaderTests.h           |   0
+ .../transport/serial/BaudRateTableTests.cpp    |   0
+ test/unittest/transport/serial/CMakeLists.txt  |   0
+ test/unittest/types/CMakeLists.txt             |   0
+ test/unittest/types/XRCETests.cpp              |   0
+ test/unittest/utils/CMakeLists.txt             |   0
+ test/unittest/utils/SeqNumUnitTests.cpp        |   0
+ test/unittest/utils/TokenBucketTest.cpp        |   0
+ utils/images/icon/eprosima_icon.bmp            | Bin
+ utils/images/icon/eprosima_icon.ico            | Bin
+ utils/images/logo/eProsimaLogo.jpg             | Bin
+ 210 files changed, 9 insertions(+), 8 deletions(-)
+ mode change 100644 => 100755 .dockerignore
+ mode change 100644 => 100755 .gitattributes
+ mode change 100644 => 100755 .github/ISSUE_TEMPLATE/general-issue.md
+ mode change 100644 => 100755 .gitignore
+ mode change 100644 => 100755 CMakeLists.txt
+ mode change 100644 => 100755 CTestConfig.cmake
+ mode change 100644 => 100755 Dockerfile
+ mode change 100644 => 100755 LICENSE
+ mode change 100644 => 100755 README.md
+ mode change 100644 => 100755 agent.refs
+ mode change 100644 => 100755 ci/CTestJenkins.cmake
+ mode change 100644 => 100755 ci/linux/CMakeLists.txt
+ mode change 100644 => 100755 ci/valgrind.supp
+ mode change 100644 => 100755 ci/windows/CMakeLists.txt
+ mode change 100644 => 100755 cmake/Soversion.cmake
+ mode change 100644 => 100755 cmake/SuperBuild.cmake
+ mode change 100644 => 100755 cmake/common/check_configuration.cmake
+ mode change 100644 => 100755 cmake/common/eprosima_libraries.cmake
+ mode change 100644 => 100755 cmake/common/gtest.cmake
+ mode change 100644 => 100755 cmake/modules/FindAsio.cmake
+ mode change 100644 => 100755 cmake/modules/FindGMock.cmake
+ mode change 100644 => 100755 cmake/modules/FindTinyXML2.cmake
+ mode change 100644 => 100755 cmake/modules/Findandroid-ifaddrs.cmake
+ mode change 100644 => 100755 cmake/packaging/Config.cmake.in
+ mode change 100644 => 100755 cmake/packaging/eProsimaPackaging.cmake
+ mode change 100644 => 100755 cmake/packaging/windows/InstallRedistributables.nsh.in
+ mode change 100644 => 100755 cmake/packaging/windows/NSIS.template.in
+ mode change 100644 => 100755 cmake/packaging/windows/NSISPackaging.cmake.in
+ mode change 100644 => 100755 colcon.pkg
+ mode change 100644 => 100755 docs/Agent.png
+ mode change 100644 => 100755 docs/General.png
+ mode change 100644 => 100755 examples/custom_agent/CMakeLists.txt
+ mode change 100644 => 100755 examples/custom_agent/custom_agent.cpp
+ mode change 100644 => 100755 include/uxr/agent/Agent.hpp
+ mode change 100644 => 100755 include/uxr/agent/AgentInstance.hpp
+ mode change 100644 => 100755 include/uxr/agent/Root.hpp
+ mode change 100644 => 100755 include/uxr/agent/client/ProxyClient.hpp
+ mode change 100644 => 100755 include/uxr/agent/client/session/Session.hpp
+ mode change 100644 => 100755 include/uxr/agent/client/session/SessionInfo.hpp
+ mode change 100644 => 100755 include/uxr/agent/client/session/stream/InputStream.hpp
+ mode change 100644 => 100755 include/uxr/agent/client/session/stream/OutputStream.hpp
+ mode change 100644 => 100755 include/uxr/agent/config.hpp.in
+ mode change 100644 => 100755 include/uxr/agent/datareader/DataReader.hpp
+ mode change 100644 => 100755 include/uxr/agent/datawriter/DataWriter.hpp
+ mode change 100644 => 100755 include/uxr/agent/logger/Logger.hpp
+ mode change 100644 => 100755 include/uxr/agent/message/InputMessage.hpp
+ mode change 100644 => 100755 include/uxr/agent/message/OutputMessage.hpp
+ mode change 100644 => 100755 include/uxr/agent/message/Packet.hpp
+ mode change 100644 => 100755 include/uxr/agent/middleware/Middleware.hpp
+ mode change 100644 => 100755 include/uxr/agent/middleware/ced/CedEntities.hpp
+ mode change 100644 => 100755 include/uxr/agent/middleware/ced/CedMiddleware.hpp
+ mode change 100644 => 100755 include/uxr/agent/middleware/fast/FastEntities.hpp
+ mode change 100644 => 100755 include/uxr/agent/middleware/fast/FastMiddleware.hpp
+ mode change 100644 => 100755 include/uxr/agent/middleware/fastdds/FastDDSEntities.hpp
+ mode change 100644 => 100755 include/uxr/agent/middleware/fastdds/FastDDSMiddleware.hpp
+ mode change 100644 => 100755 include/uxr/agent/middleware/utils/Callbacks.hpp
+ mode change 100644 => 100755 include/uxr/agent/object/XRCEObject.hpp
+ mode change 100644 => 100755 include/uxr/agent/p2p/InternalClient.hpp
+ mode change 100644 => 100755 include/uxr/agent/p2p/InternalClientManager.hpp
+ mode change 100644 => 100755 include/uxr/agent/participant/Participant.hpp
+ mode change 100644 => 100755 include/uxr/agent/processor/Processor.hpp
+ mode change 100644 => 100755 include/uxr/agent/publisher/Publisher.hpp
+ mode change 100644 => 100755 include/uxr/agent/reader/Reader.hpp
+ mode change 100644 => 100755 include/uxr/agent/replier/Replier.hpp
+ mode change 100644 => 100755 include/uxr/agent/requester/Requester.hpp
+ mode change 100644 => 100755 include/uxr/agent/scheduler/PacketScheduler.hpp
+ mode change 100644 => 100755 include/uxr/agent/scheduler/Scheduler.hpp
+ mode change 100644 => 100755 include/uxr/agent/subscriber/Subscriber.hpp
+ mode change 100644 => 100755 include/uxr/agent/topic/Topic.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/Server.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/SessionManager.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/TransportRc.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/can/CanAgentLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/custom/CustomAgent.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/discovery/DiscoveryServer.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/discovery/DiscoveryServerLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/discovery/DiscoveryServerWindows.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/endpoint/CanEndPoint.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/endpoint/CustomEndPoint.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/endpoint/IPv4EndPoint.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/endpoint/IPv6EndPoint.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/endpoint/MultiSerialEndPoint.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/endpoint/SerialEndPoint.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/p2p/AgentDiscoverer.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/p2p/AgentDiscovererLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/serial/MultiSerialAgentLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/serial/MultiTermiosAgentLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/serial/PseudoTerminalAgentLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/serial/SerialAgentLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/serial/TermiosAgentLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/serial/baud_rate_table_linux.h
+ mode change 100644 => 100755 include/uxr/agent/transport/stream_framing/StreamFramingProtocol.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/tcp/TCPConnection.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/tcp/TCPServerBase.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/tcp/TCPv4AgentLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/tcp/TCPv4AgentWindows.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/tcp/TCPv6AgentLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/tcp/TCPv6AgentWindows.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/udp/UDPv4AgentLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/udp/UDPv4AgentWindows.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/udp/UDPv6AgentLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/udp/UDPv6AgentWindows.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/util/InterfaceLinux.hpp
+ mode change 100644 => 100755 include/uxr/agent/transport/util/InterfaceWindows.hpp
+ mode change 100644 => 100755 include/uxr/agent/types/MessageHeader.hpp
+ mode change 100644 => 100755 include/uxr/agent/types/Optional.hpp
+ mode change 100644 => 100755 include/uxr/agent/types/SubMessageHeader.hpp
+ mode change 100644 => 100755 include/uxr/agent/types/TopicPubSubType.hpp
+ mode change 100644 => 100755 include/uxr/agent/types/XRCETypes.hpp
+ mode change 100644 => 100755 include/uxr/agent/utils/ArgumentParser.hpp
+ mode change 100644 => 100755 include/uxr/agent/utils/Color.hpp
+ mode change 100644 => 100755 include/uxr/agent/utils/Conversion.hpp
+ mode change 100644 => 100755 include/uxr/agent/utils/Functions.hpp
+ mode change 100644 => 100755 include/uxr/agent/utils/SeqNum.hpp
+ mode change 100644 => 100755 include/uxr/agent/utils/SharedMutex.hpp
+ mode change 100644 => 100755 include/uxr/agent/utils/SharedMutexPriority.hpp
+ mode change 100644 => 100755 include/uxr/agent/utils/Time.hpp
+ mode change 100644 => 100755 include/uxr/agent/utils/TokenBucket.hpp
+ mode change 100644 => 100755 include/uxr/agent/visibility.hpp
+ mode change 100644 => 100755 microxrce_agent.cpp
+ mode change 100644 => 100755 snap/snapcraft.yaml
+ mode change 100644 => 100755 src/cpp/Agent.cpp
+ mode change 100644 => 100755 src/cpp/AgentInstance.cpp
+ mode change 100644 => 100755 src/cpp/Root.cpp
+ mode change 100644 => 100755 src/cpp/client/ProxyClient.cpp
+ mode change 100644 => 100755 src/cpp/datareader/DataReader.cpp
+ mode change 100644 => 100755 src/cpp/datawriter/DataWriter.cpp
+ mode change 100644 => 100755 src/cpp/message/InputMessage.cpp
+ mode change 100644 => 100755 src/cpp/message/OutputMessage.cpp
+ mode change 100644 => 100755 src/cpp/middleware/ced/CedEntities.cpp
+ mode change 100644 => 100755 src/cpp/middleware/ced/CedMiddleware.cpp
+ mode change 100644 => 100755 src/cpp/middleware/fast/FastEntities.cpp
+ mode change 100644 => 100755 src/cpp/middleware/fast/FastMiddleware.cpp
+ mode change 100644 => 100755 src/cpp/middleware/fastdds/FastDDSEntities.cpp
+ mode change 100644 => 100755 src/cpp/middleware/fastdds/FastDDSMiddleware.cpp
+ mode change 100644 => 100755 src/cpp/object/XRCEObject.cpp
+ mode change 100644 => 100755 src/cpp/p2p/InternalClient.cpp
+ mode change 100644 => 100755 src/cpp/p2p/InternalClientManager.cpp
+ mode change 100644 => 100755 src/cpp/participant/Participant.cpp
+ mode change 100644 => 100755 src/cpp/processor/Processor.cpp
+ mode change 100644 => 100755 src/cpp/publisher/Publisher.cpp
+ mode change 100644 => 100755 src/cpp/replier/Replier.cpp
+ mode change 100644 => 100755 src/cpp/requester/Requester.cpp
+ mode change 100644 => 100755 src/cpp/subscriber/Subscriber.cpp
+ mode change 100644 => 100755 src/cpp/topic/Topic.cpp
+ mode change 100644 => 100755 src/cpp/transport/Server.cpp
+ mode change 100644 => 100755 src/cpp/transport/can/CanAgentLinux.cpp
+ mode change 100644 => 100755 src/cpp/transport/custom/CustomAgent.cpp
+ mode change 100644 => 100755 src/cpp/transport/discovery/DiscoveryServer.cpp
+ mode change 100644 => 100755 src/cpp/transport/discovery/DiscoveryServerLinux.cpp
+ mode change 100644 => 100755 src/cpp/transport/discovery/DiscoveryServerWindows.cpp
+ mode change 100644 => 100755 src/cpp/transport/p2p/AgentDiscoverer.cpp
+ mode change 100644 => 100755 src/cpp/transport/p2p/AgentDiscovererLinux.cpp
+ mode change 100644 => 100755 src/cpp/transport/serial/MultiSerialAgentLinux.cpp
+ mode change 100644 => 100755 src/cpp/transport/serial/MultiTermiosAgentLinux.cpp
+ mode change 100644 => 100755 src/cpp/transport/serial/PseudoTerminalAgentLinux.cpp
+ mode change 100644 => 100755 src/cpp/transport/serial/SerialAgentLinux.cpp
+ mode change 100644 => 100755 src/cpp/transport/serial/TermiosAgentLinux.cpp
+ mode change 100644 => 100755 src/cpp/transport/stream_framing/StreamFramingProtocol.cpp
+ mode change 100644 => 100755 src/cpp/transport/tcp/TCPv4AgentLinux.cpp
+ mode change 100644 => 100755 src/cpp/transport/tcp/TCPv4AgentWindows.cpp
+ mode change 100644 => 100755 src/cpp/transport/tcp/TCPv6AgentLinux.cpp
+ mode change 100644 => 100755 src/cpp/transport/tcp/TCPv6AgentWindows.cpp
+ mode change 100644 => 100755 src/cpp/transport/udp/UDPv4AgentLinux.cpp
+ mode change 100644 => 100755 src/cpp/transport/udp/UDPv4AgentWindows.cpp
+ mode change 100644 => 100755 src/cpp/transport/udp/UDPv6AgentLinux.cpp
+ mode change 100644 => 100755 src/cpp/transport/udp/UDPv6AgentWindows.cpp
+ mode change 100644 => 100755 src/cpp/types/MessageHeader.cpp
+ mode change 100644 => 100755 src/cpp/types/SubMessageHeader.cpp
+ mode change 100644 => 100755 src/cpp/types/TopicPubSubType.cpp
+ mode change 100644 => 100755 src/cpp/types/XRCETypes.cpp
+ mode change 100644 => 100755 src/cpp/utils/ArgumentParser.cpp
+ mode change 100644 => 100755 src/cpp/xmlobjects/xmlobjects.cpp
+ mode change 100644 => 100755 src/cpp/xmlobjects/xmlobjects.h
+ mode change 100644 => 100755 test/agent.refs
+ mode change 100644 => 100755 test/blackbox/tree/CMakeLists.txt
+ mode change 100644 => 100755 test/blackbox/tree/TreeTests.cpp
+ mode change 100644 => 100755 test/case/CMakeLists.txt
+ mode change 100644 => 100755 test/case/installation/InstallationTest.cmake
+ mode change 100644 => 100755 test/case/packaging/CMakeLists.txt
+ mode change 100644 => 100755 test/case/packaging/Packaging.cmake
+ mode change 100644 => 100755 test/case/packaging/main.cpp
+ mode change 100644 => 100755 test/cmake/CMakeLists.txt
+ mode change 100644 => 100755 test/cmake/main.cpp
+ mode change 100644 => 100755 test/mock/Middleware/uxr/agent/middleware/Middleware.hpp
+ mode change 100644 => 100755 test/mock/Middleware/uxr/agent/middleware/fast/FastMiddleware.hpp
+ mode change 100644 => 100755 test/mock/ProxyClient/uxr/agent/client/ProxyClient.hpp
+ mode change 100644 => 100755 test/unittest/CMakeLists.txt
+ mode change 100644 => 100755 test/unittest/Common.cpp
+ mode change 100644 => 100755 test/unittest/Common.h
+ mode change 100644 => 100755 test/unittest/RootTests.cpp
+ mode change 100644 => 100755 test/unittest/agent/AgentUnitTests.cpp
+ mode change 100644 => 100755 test/unittest/agent/CMakeLists.txt
+ mode change 100644 => 100755 test/unittest/client/session/stream/CMakeLists.txt
+ mode change 100644 => 100755 test/unittest/client/session/stream/InputStreamTest.cpp
+ mode change 100644 => 100755 test/unittest/client/session/stream/OutputStreamTest.cpp
+ mode change 100644 => 100755 test/unittest/middleware/ced/CMakeLists.txt
+ mode change 100644 => 100755 test/unittest/middleware/ced/CedMiddlewareTests.cpp
+ mode change 100644 => 100755 test/unittest/root/DataReaderTests.cpp
+ mode change 100644 => 100755 test/unittest/root/DataReaderTests.h
+ mode change 100644 => 100755 test/unittest/transport/serial/BaudRateTableTests.cpp
+ mode change 100644 => 100755 test/unittest/transport/serial/CMakeLists.txt
+ mode change 100644 => 100755 test/unittest/types/CMakeLists.txt
+ mode change 100644 => 100755 test/unittest/types/XRCETests.cpp
+ mode change 100644 => 100755 test/unittest/utils/CMakeLists.txt
+ mode change 100644 => 100755 test/unittest/utils/SeqNumUnitTests.cpp
+ mode change 100644 => 100755 test/unittest/utils/TokenBucketTest.cpp
+ mode change 100644 => 100755 utils/images/icon/eprosima_icon.bmp
+ mode change 100644 => 100755 utils/images/icon/eprosima_icon.ico
+ mode change 100644 => 100755 utils/images/logo/eProsimaLogo.jpg
+
+diff --git a/.dockerignore b/.dockerignore
+old mode 100644
+new mode 100755
+diff --git a/.gitattributes b/.gitattributes
+old mode 100644
+new mode 100755
+diff --git a/.github/ISSUE_TEMPLATE/general-issue.md b/.github/ISSUE_TEMPLATE/general-issue.md
+old mode 100644
+new mode 100755
+diff --git a/.gitignore b/.gitignore
+old mode 100644
+new mode 100755
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+old mode 100644
+new mode 100755
+index 39c920e..0648b82
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -27,15 +27,15 @@ option(UAGENT_ISOLATED_INSTALL "Install the project and dependencies into separa
+ option(UAGENT_USE_INTERNAL_GTEST "Enable internal GTest libraries." OFF)
+ option(BUILD_SHARED_LIBS "Control shared/static building." ON)
+ 
+-option(UAGENT_USE_SYSTEM_FASTDDS "Force find and use system installed Fast-DDS." OFF)
+-option(UAGENT_USE_SYSTEM_FASTCDR "Force find and use system installed Fast-CDR." OFF)
++option(UAGENT_USE_SYSTEM_FASTDDS "Force find and use system installed Fast-DDS." ON)
++option(UAGENT_USE_SYSTEM_FASTCDR "Force find and use system installed Fast-CDR." ON)
+ option(UAGENT_USE_SYSTEM_LOGGER "Force find and use system installed spdlog." OFF)
+ option(UAGENT_FAST_PROFILE "Build FastMiddleware profile." ON)
+ option(UAGENT_CED_PROFILE "Build CedMiddleware profile." ON)
+ option(UAGENT_DISCOVERY_PROFILE "Build Discovery profile." ON)
+-option(UAGENT_P2P_PROFILE "Build P2P discovery profile." ON)
++option(UAGENT_P2P_PROFILE "Build P2P discovery profile." OFF)
+ option(UAGENT_SOCKETCAN_PROFILE "Build Agent CAN FD transport." ON)
+-option(UAGENT_LOGGER_PROFILE "Build logger profile." ON)
++option(UAGENT_LOGGER_PROFILE "Build logger profile." OFF)
+ option(UAGENT_SECURITY_PROFILE "Build security profile." OFF)
+ option(UAGENT_BUILD_EXECUTABLE "Build Micro XRCE-DDS Agent provided executable." ON)
+ option(UAGENT_BUILD_USAGE_EXAMPLES "Build Micro XRCE-DDS Agent built-in usage examples" OFF)
+@@ -115,7 +115,7 @@ endif()
+ ###############################################################################
+ # Project
+ ###############################################################################
+-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
++set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${D}/cmake/modules)
+ if(NOT UAGENT_SUPERBUILD)
+     project(microxrcedds_agent VERSION "2.2.1" LANGUAGES C CXX)
+ else()
+@@ -144,13 +144,14 @@ endif()
+ ###############################################################################
+ # Load external dependencies.
+ ###############################################################################
+-set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${PROJECT_BINARY_DIR}/temp_install)
++#set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${PROJECT_BINARY_DIR}/temp_install)
+ 
+ foreach(d ${_deps})
+     list(GET d 0 _name)
+     list(GET d 1 _version)
+-    set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${PROJECT_BINARY_DIR}/temp_install/${_name}-${_version})
+-    find_package(${_name} ${_version} REQUIRED)
++    #set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${PROJECT_BINARY_DIR}/temp_install/${_name}-${_version})
++    find_package(${_name} REQUIRED) 
++    #${_version} REQUIRED)
+ endforeach()
+ 
+ ###############################################################################
+diff --git a/CTestConfig.cmake b/CTestConfig.cmake
+old mode 100644
+new mode 100755
+diff --git a/Dockerfile b/Dockerfile
+old mode 100644
+new mode 100755
+diff --git a/LICENSE b/LICENSE
+old mode 100644
+new mode 100755
+diff --git a/README.md b/README.md
+old mode 100644
+new mode 100755
+diff --git a/agent.refs b/agent.refs
+old mode 100644
+new mode 100755
+diff --git a/ci/CTestJenkins.cmake b/ci/CTestJenkins.cmake
+old mode 100644
+new mode 100755
+diff --git a/ci/linux/CMakeLists.txt b/ci/linux/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/ci/valgrind.supp b/ci/valgrind.supp
+old mode 100644
+new mode 100755
+diff --git a/ci/windows/CMakeLists.txt b/ci/windows/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/cmake/Soversion.cmake b/cmake/Soversion.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/SuperBuild.cmake b/cmake/SuperBuild.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/common/check_configuration.cmake b/cmake/common/check_configuration.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/common/eprosima_libraries.cmake b/cmake/common/eprosima_libraries.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/common/gtest.cmake b/cmake/common/gtest.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/modules/FindAsio.cmake b/cmake/modules/FindAsio.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/modules/FindGMock.cmake b/cmake/modules/FindGMock.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/modules/FindTinyXML2.cmake b/cmake/modules/FindTinyXML2.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/modules/Findandroid-ifaddrs.cmake b/cmake/modules/Findandroid-ifaddrs.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/packaging/Config.cmake.in b/cmake/packaging/Config.cmake.in
+old mode 100644
+new mode 100755
+diff --git a/cmake/packaging/eProsimaPackaging.cmake b/cmake/packaging/eProsimaPackaging.cmake
+old mode 100644
+new mode 100755
+diff --git a/cmake/packaging/windows/InstallRedistributables.nsh.in b/cmake/packaging/windows/InstallRedistributables.nsh.in
+old mode 100644
+new mode 100755
+diff --git a/cmake/packaging/windows/NSIS.template.in b/cmake/packaging/windows/NSIS.template.in
+old mode 100644
+new mode 100755
+diff --git a/cmake/packaging/windows/NSISPackaging.cmake.in b/cmake/packaging/windows/NSISPackaging.cmake.in
+old mode 100644
+new mode 100755
+diff --git a/colcon.pkg b/colcon.pkg
+old mode 100644
+new mode 100755
+diff --git a/docs/Agent.png b/docs/Agent.png
+old mode 100644
+new mode 100755
+diff --git a/docs/General.png b/docs/General.png
+old mode 100644
+new mode 100755
+diff --git a/examples/custom_agent/CMakeLists.txt b/examples/custom_agent/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/examples/custom_agent/custom_agent.cpp b/examples/custom_agent/custom_agent.cpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/Agent.hpp b/include/uxr/agent/Agent.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/AgentInstance.hpp b/include/uxr/agent/AgentInstance.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/Root.hpp b/include/uxr/agent/Root.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/client/ProxyClient.hpp b/include/uxr/agent/client/ProxyClient.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/client/session/Session.hpp b/include/uxr/agent/client/session/Session.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/client/session/SessionInfo.hpp b/include/uxr/agent/client/session/SessionInfo.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/client/session/stream/InputStream.hpp b/include/uxr/agent/client/session/stream/InputStream.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/client/session/stream/OutputStream.hpp b/include/uxr/agent/client/session/stream/OutputStream.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/config.hpp.in b/include/uxr/agent/config.hpp.in
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/datareader/DataReader.hpp b/include/uxr/agent/datareader/DataReader.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/datawriter/DataWriter.hpp b/include/uxr/agent/datawriter/DataWriter.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/logger/Logger.hpp b/include/uxr/agent/logger/Logger.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/message/InputMessage.hpp b/include/uxr/agent/message/InputMessage.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/message/OutputMessage.hpp b/include/uxr/agent/message/OutputMessage.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/message/Packet.hpp b/include/uxr/agent/message/Packet.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/middleware/Middleware.hpp b/include/uxr/agent/middleware/Middleware.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/middleware/ced/CedEntities.hpp b/include/uxr/agent/middleware/ced/CedEntities.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/middleware/ced/CedMiddleware.hpp b/include/uxr/agent/middleware/ced/CedMiddleware.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/middleware/fast/FastEntities.hpp b/include/uxr/agent/middleware/fast/FastEntities.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/middleware/fast/FastMiddleware.hpp b/include/uxr/agent/middleware/fast/FastMiddleware.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/middleware/fastdds/FastDDSEntities.hpp b/include/uxr/agent/middleware/fastdds/FastDDSEntities.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/middleware/fastdds/FastDDSMiddleware.hpp b/include/uxr/agent/middleware/fastdds/FastDDSMiddleware.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/middleware/utils/Callbacks.hpp b/include/uxr/agent/middleware/utils/Callbacks.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/object/XRCEObject.hpp b/include/uxr/agent/object/XRCEObject.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/p2p/InternalClient.hpp b/include/uxr/agent/p2p/InternalClient.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/p2p/InternalClientManager.hpp b/include/uxr/agent/p2p/InternalClientManager.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/participant/Participant.hpp b/include/uxr/agent/participant/Participant.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/processor/Processor.hpp b/include/uxr/agent/processor/Processor.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/publisher/Publisher.hpp b/include/uxr/agent/publisher/Publisher.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/reader/Reader.hpp b/include/uxr/agent/reader/Reader.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/replier/Replier.hpp b/include/uxr/agent/replier/Replier.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/requester/Requester.hpp b/include/uxr/agent/requester/Requester.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/scheduler/PacketScheduler.hpp b/include/uxr/agent/scheduler/PacketScheduler.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/scheduler/Scheduler.hpp b/include/uxr/agent/scheduler/Scheduler.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/subscriber/Subscriber.hpp b/include/uxr/agent/subscriber/Subscriber.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/topic/Topic.hpp b/include/uxr/agent/topic/Topic.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/Server.hpp b/include/uxr/agent/transport/Server.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/SessionManager.hpp b/include/uxr/agent/transport/SessionManager.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/TransportRc.hpp b/include/uxr/agent/transport/TransportRc.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/can/CanAgentLinux.hpp b/include/uxr/agent/transport/can/CanAgentLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/custom/CustomAgent.hpp b/include/uxr/agent/transport/custom/CustomAgent.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/discovery/DiscoveryServer.hpp b/include/uxr/agent/transport/discovery/DiscoveryServer.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/discovery/DiscoveryServerLinux.hpp b/include/uxr/agent/transport/discovery/DiscoveryServerLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/discovery/DiscoveryServerWindows.hpp b/include/uxr/agent/transport/discovery/DiscoveryServerWindows.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/endpoint/CanEndPoint.hpp b/include/uxr/agent/transport/endpoint/CanEndPoint.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/endpoint/CustomEndPoint.hpp b/include/uxr/agent/transport/endpoint/CustomEndPoint.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/endpoint/IPv4EndPoint.hpp b/include/uxr/agent/transport/endpoint/IPv4EndPoint.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/endpoint/IPv6EndPoint.hpp b/include/uxr/agent/transport/endpoint/IPv6EndPoint.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/endpoint/MultiSerialEndPoint.hpp b/include/uxr/agent/transport/endpoint/MultiSerialEndPoint.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/endpoint/SerialEndPoint.hpp b/include/uxr/agent/transport/endpoint/SerialEndPoint.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/p2p/AgentDiscoverer.hpp b/include/uxr/agent/transport/p2p/AgentDiscoverer.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/p2p/AgentDiscovererLinux.hpp b/include/uxr/agent/transport/p2p/AgentDiscovererLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/serial/MultiSerialAgentLinux.hpp b/include/uxr/agent/transport/serial/MultiSerialAgentLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/serial/MultiTermiosAgentLinux.hpp b/include/uxr/agent/transport/serial/MultiTermiosAgentLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/serial/PseudoTerminalAgentLinux.hpp b/include/uxr/agent/transport/serial/PseudoTerminalAgentLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/serial/SerialAgentLinux.hpp b/include/uxr/agent/transport/serial/SerialAgentLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/serial/TermiosAgentLinux.hpp b/include/uxr/agent/transport/serial/TermiosAgentLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/serial/baud_rate_table_linux.h b/include/uxr/agent/transport/serial/baud_rate_table_linux.h
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/stream_framing/StreamFramingProtocol.hpp b/include/uxr/agent/transport/stream_framing/StreamFramingProtocol.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/tcp/TCPConnection.hpp b/include/uxr/agent/transport/tcp/TCPConnection.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/tcp/TCPServerBase.hpp b/include/uxr/agent/transport/tcp/TCPServerBase.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/tcp/TCPv4AgentLinux.hpp b/include/uxr/agent/transport/tcp/TCPv4AgentLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/tcp/TCPv4AgentWindows.hpp b/include/uxr/agent/transport/tcp/TCPv4AgentWindows.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/tcp/TCPv6AgentLinux.hpp b/include/uxr/agent/transport/tcp/TCPv6AgentLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/tcp/TCPv6AgentWindows.hpp b/include/uxr/agent/transport/tcp/TCPv6AgentWindows.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/udp/UDPv4AgentLinux.hpp b/include/uxr/agent/transport/udp/UDPv4AgentLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/udp/UDPv4AgentWindows.hpp b/include/uxr/agent/transport/udp/UDPv4AgentWindows.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/udp/UDPv6AgentLinux.hpp b/include/uxr/agent/transport/udp/UDPv6AgentLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/udp/UDPv6AgentWindows.hpp b/include/uxr/agent/transport/udp/UDPv6AgentWindows.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/util/InterfaceLinux.hpp b/include/uxr/agent/transport/util/InterfaceLinux.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/transport/util/InterfaceWindows.hpp b/include/uxr/agent/transport/util/InterfaceWindows.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/types/MessageHeader.hpp b/include/uxr/agent/types/MessageHeader.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/types/Optional.hpp b/include/uxr/agent/types/Optional.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/types/SubMessageHeader.hpp b/include/uxr/agent/types/SubMessageHeader.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/types/TopicPubSubType.hpp b/include/uxr/agent/types/TopicPubSubType.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/types/XRCETypes.hpp b/include/uxr/agent/types/XRCETypes.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/utils/ArgumentParser.hpp b/include/uxr/agent/utils/ArgumentParser.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/utils/Color.hpp b/include/uxr/agent/utils/Color.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/utils/Conversion.hpp b/include/uxr/agent/utils/Conversion.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/utils/Functions.hpp b/include/uxr/agent/utils/Functions.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/utils/SeqNum.hpp b/include/uxr/agent/utils/SeqNum.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/utils/SharedMutex.hpp b/include/uxr/agent/utils/SharedMutex.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/utils/SharedMutexPriority.hpp b/include/uxr/agent/utils/SharedMutexPriority.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/utils/Time.hpp b/include/uxr/agent/utils/Time.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/utils/TokenBucket.hpp b/include/uxr/agent/utils/TokenBucket.hpp
+old mode 100644
+new mode 100755
+diff --git a/include/uxr/agent/visibility.hpp b/include/uxr/agent/visibility.hpp
+old mode 100644
+new mode 100755
+diff --git a/microxrce_agent.cpp b/microxrce_agent.cpp
+old mode 100644
+new mode 100755
+diff --git a/snap/snapcraft.yaml b/snap/snapcraft.yaml
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/Agent.cpp b/src/cpp/Agent.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/AgentInstance.cpp b/src/cpp/AgentInstance.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/Root.cpp b/src/cpp/Root.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/client/ProxyClient.cpp b/src/cpp/client/ProxyClient.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/datareader/DataReader.cpp b/src/cpp/datareader/DataReader.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/datawriter/DataWriter.cpp b/src/cpp/datawriter/DataWriter.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/message/InputMessage.cpp b/src/cpp/message/InputMessage.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/message/OutputMessage.cpp b/src/cpp/message/OutputMessage.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/middleware/ced/CedEntities.cpp b/src/cpp/middleware/ced/CedEntities.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/middleware/ced/CedMiddleware.cpp b/src/cpp/middleware/ced/CedMiddleware.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/middleware/fast/FastEntities.cpp b/src/cpp/middleware/fast/FastEntities.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/middleware/fast/FastMiddleware.cpp b/src/cpp/middleware/fast/FastMiddleware.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/middleware/fastdds/FastDDSEntities.cpp b/src/cpp/middleware/fastdds/FastDDSEntities.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/middleware/fastdds/FastDDSMiddleware.cpp b/src/cpp/middleware/fastdds/FastDDSMiddleware.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/object/XRCEObject.cpp b/src/cpp/object/XRCEObject.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/p2p/InternalClient.cpp b/src/cpp/p2p/InternalClient.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/p2p/InternalClientManager.cpp b/src/cpp/p2p/InternalClientManager.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/participant/Participant.cpp b/src/cpp/participant/Participant.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/processor/Processor.cpp b/src/cpp/processor/Processor.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/publisher/Publisher.cpp b/src/cpp/publisher/Publisher.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/replier/Replier.cpp b/src/cpp/replier/Replier.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/requester/Requester.cpp b/src/cpp/requester/Requester.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/subscriber/Subscriber.cpp b/src/cpp/subscriber/Subscriber.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/topic/Topic.cpp b/src/cpp/topic/Topic.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/Server.cpp b/src/cpp/transport/Server.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/can/CanAgentLinux.cpp b/src/cpp/transport/can/CanAgentLinux.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/custom/CustomAgent.cpp b/src/cpp/transport/custom/CustomAgent.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/discovery/DiscoveryServer.cpp b/src/cpp/transport/discovery/DiscoveryServer.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/discovery/DiscoveryServerLinux.cpp b/src/cpp/transport/discovery/DiscoveryServerLinux.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/discovery/DiscoveryServerWindows.cpp b/src/cpp/transport/discovery/DiscoveryServerWindows.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/p2p/AgentDiscoverer.cpp b/src/cpp/transport/p2p/AgentDiscoverer.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/p2p/AgentDiscovererLinux.cpp b/src/cpp/transport/p2p/AgentDiscovererLinux.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/serial/MultiSerialAgentLinux.cpp b/src/cpp/transport/serial/MultiSerialAgentLinux.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/serial/MultiTermiosAgentLinux.cpp b/src/cpp/transport/serial/MultiTermiosAgentLinux.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/serial/PseudoTerminalAgentLinux.cpp b/src/cpp/transport/serial/PseudoTerminalAgentLinux.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/serial/SerialAgentLinux.cpp b/src/cpp/transport/serial/SerialAgentLinux.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/serial/TermiosAgentLinux.cpp b/src/cpp/transport/serial/TermiosAgentLinux.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/stream_framing/StreamFramingProtocol.cpp b/src/cpp/transport/stream_framing/StreamFramingProtocol.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/tcp/TCPv4AgentLinux.cpp b/src/cpp/transport/tcp/TCPv4AgentLinux.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/tcp/TCPv4AgentWindows.cpp b/src/cpp/transport/tcp/TCPv4AgentWindows.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/tcp/TCPv6AgentLinux.cpp b/src/cpp/transport/tcp/TCPv6AgentLinux.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/tcp/TCPv6AgentWindows.cpp b/src/cpp/transport/tcp/TCPv6AgentWindows.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/udp/UDPv4AgentLinux.cpp b/src/cpp/transport/udp/UDPv4AgentLinux.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/udp/UDPv4AgentWindows.cpp b/src/cpp/transport/udp/UDPv4AgentWindows.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/udp/UDPv6AgentLinux.cpp b/src/cpp/transport/udp/UDPv6AgentLinux.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/transport/udp/UDPv6AgentWindows.cpp b/src/cpp/transport/udp/UDPv6AgentWindows.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/types/MessageHeader.cpp b/src/cpp/types/MessageHeader.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/types/SubMessageHeader.cpp b/src/cpp/types/SubMessageHeader.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/types/TopicPubSubType.cpp b/src/cpp/types/TopicPubSubType.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/types/XRCETypes.cpp b/src/cpp/types/XRCETypes.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/utils/ArgumentParser.cpp b/src/cpp/utils/ArgumentParser.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/xmlobjects/xmlobjects.cpp b/src/cpp/xmlobjects/xmlobjects.cpp
+old mode 100644
+new mode 100755
+diff --git a/src/cpp/xmlobjects/xmlobjects.h b/src/cpp/xmlobjects/xmlobjects.h
+old mode 100644
+new mode 100755
+diff --git a/test/agent.refs b/test/agent.refs
+old mode 100644
+new mode 100755
+diff --git a/test/blackbox/tree/CMakeLists.txt b/test/blackbox/tree/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/blackbox/tree/TreeTests.cpp b/test/blackbox/tree/TreeTests.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/case/CMakeLists.txt b/test/case/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/case/installation/InstallationTest.cmake b/test/case/installation/InstallationTest.cmake
+old mode 100644
+new mode 100755
+diff --git a/test/case/packaging/CMakeLists.txt b/test/case/packaging/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/case/packaging/Packaging.cmake b/test/case/packaging/Packaging.cmake
+old mode 100644
+new mode 100755
+diff --git a/test/case/packaging/main.cpp b/test/case/packaging/main.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/cmake/CMakeLists.txt b/test/cmake/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/cmake/main.cpp b/test/cmake/main.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/mock/Middleware/uxr/agent/middleware/Middleware.hpp b/test/mock/Middleware/uxr/agent/middleware/Middleware.hpp
+old mode 100644
+new mode 100755
+diff --git a/test/mock/Middleware/uxr/agent/middleware/fast/FastMiddleware.hpp b/test/mock/Middleware/uxr/agent/middleware/fast/FastMiddleware.hpp
+old mode 100644
+new mode 100755
+diff --git a/test/mock/ProxyClient/uxr/agent/client/ProxyClient.hpp b/test/mock/ProxyClient/uxr/agent/client/ProxyClient.hpp
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/CMakeLists.txt b/test/unittest/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/Common.cpp b/test/unittest/Common.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/Common.h b/test/unittest/Common.h
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/RootTests.cpp b/test/unittest/RootTests.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/agent/AgentUnitTests.cpp b/test/unittest/agent/AgentUnitTests.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/agent/CMakeLists.txt b/test/unittest/agent/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/client/session/stream/CMakeLists.txt b/test/unittest/client/session/stream/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/client/session/stream/InputStreamTest.cpp b/test/unittest/client/session/stream/InputStreamTest.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/client/session/stream/OutputStreamTest.cpp b/test/unittest/client/session/stream/OutputStreamTest.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/middleware/ced/CMakeLists.txt b/test/unittest/middleware/ced/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/middleware/ced/CedMiddlewareTests.cpp b/test/unittest/middleware/ced/CedMiddlewareTests.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/root/DataReaderTests.cpp b/test/unittest/root/DataReaderTests.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/root/DataReaderTests.h b/test/unittest/root/DataReaderTests.h
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/transport/serial/BaudRateTableTests.cpp b/test/unittest/transport/serial/BaudRateTableTests.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/transport/serial/CMakeLists.txt b/test/unittest/transport/serial/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/types/CMakeLists.txt b/test/unittest/types/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/types/XRCETests.cpp b/test/unittest/types/XRCETests.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/utils/CMakeLists.txt b/test/unittest/utils/CMakeLists.txt
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/utils/SeqNumUnitTests.cpp b/test/unittest/utils/SeqNumUnitTests.cpp
+old mode 100644
+new mode 100755
+diff --git a/test/unittest/utils/TokenBucketTest.cpp b/test/unittest/utils/TokenBucketTest.cpp
+old mode 100644
+new mode 100755
+diff --git a/utils/images/icon/eprosima_icon.bmp b/utils/images/icon/eprosima_icon.bmp
+old mode 100644
+new mode 100755
+diff --git a/utils/images/icon/eprosima_icon.ico b/utils/images/icon/eprosima_icon.ico
+old mode 100644
+new mode 100755
+diff --git a/utils/images/logo/eProsimaLogo.jpg b/utils/images/logo/eProsimaLogo.jpg
+old mode 100644
+new mode 100755
