@@ -22,11 +22,23 @@ DEPENDS += "googletest"
 
 inherit cmake
 
-do_install_append() {
-    rm -rf ${D}/usr/share
+do_install() {
+
+    install -d ${D}${libdir}
+    install -m 0644 ${WORKDIR}/build/libmicroxrcedds_client.a ${D}${libdir}/
+
+    install -d ${D}${base_prefix}/opt/microxrce/
+    cp -r ${WORKDIR}/build/examples/* ${D}${base_prefix}/opt/microxrce/
 }
+
+#INSANE_SKIP_${PN} += "dev-so"
+INSANE_SKIP_${PN} += "ldflags"
+INSANE_SKIP_${PN}-dev += "ldflags"
+
+FILES_${PN} = "${libdir}/* ${base_prefix}/opt/*"
+
 OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
 
 # Specify any options you want to pass to cmake using EXTRA_OECMAKE:
-EXTRA_OECMAKE += "-DUCLIENT_SUPERBUILD=ON -DUCLIENT_BUILD_MICROCDR=ON"
+EXTRA_OECMAKE += "-DUCLIENT_BUILD_EXAMPLES=ON -DUCLIENT_SUPERBUILD=ON -DUCLIENT_BUILD_MICROCDR=ON"
 

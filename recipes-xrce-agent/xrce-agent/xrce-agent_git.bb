@@ -22,11 +22,23 @@ DEPENDS = "fastcdr fastrtps googletest"
 
 inherit cmake
 
+do_install() {
+
+    install -d ${D}${libdir}
+    install -m 0644 ${WORKDIR}/build/libmicroxrcedds_agent.so.2.2 ${D}${libdir}/
+
+    install -d ${D}${base_prefix}/opt/microxrce/
+    cp -r ${WORKDIR}/build/MicroXRCEAgent ${D}${base_prefix}/opt/microxrce/
+}
+
+#INSANE_SKIP_${PN} += "dev-so"
+INSANE_SKIP_${PN} += "ldflags"
+INSANE_SKIP_${PN}-dev += "ldflags"
+
+FILES_${PN} = "${libdir}/* ${base_prefix}/opt/*"
+
 OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
 
-do_install_append() {
-    rm -rf ${D}/usr/share
-}
 # Specify any options you want to pass to cmake using EXTRA_OECMAKE:
-EXTRA_OECMAKE += "-DUAGENT_SUPERBUILD=ON -DUAGENT_P2P_PROFILE=OFF -DUAGENT_LOGGER_PROFILE=off"
+EXTRA_OECMAKE += "-DCMAKE_SKIP_RPATH=TRUE -DUAGENT_SUPERBUILD=ON -DUAGENT_P2P_PROFILE=OFF -DUAGENT_LOGGER_PROFILE=off"
 
